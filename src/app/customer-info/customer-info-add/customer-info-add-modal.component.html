@@ -1,0 +1,100 @@
+<div class="alert-modal">
+    <h3 class="alert-modal-title">NEW Person</h3>  
+    <div class="alert-modal-body">
+        <form [formGroup]="personForm" class="form" (ngSubmit)="onSubmit(personForm.value)">
+            <div class="form-group">
+                <mat-form-field>
+                  <input matInput formControlName="firstName" placeholder="First Name"/>
+                </mat-form-field>
+            </div>
+          
+            <div class="form-group">
+                <mat-form-field>
+                  <input matInput formControlName="lastName" placeholder="Last Name"/>
+                </mat-form-field>
+            </div>
+            
+            <div class="form-group pull-right">
+                <mat-form-field>
+                    <input matInput formControlName="phone1" placeholder="Phone Number"/>
+                </mat-form-field>
+  
+                <!-- <mat-form-field>
+                    <input matInput formControlName="phone2" placeholder="Phone Number"/>
+                  </mat-form-field>
+  
+                  <mat-form-field>
+                      <input matInput formControlName="phone3" placeholder="Phone Number"/>
+                    </mat-form-field> -->
+            </div>
+            
+            <div class="form-group">
+                <mat-form-field>
+                  <input matInput formControlName="phone2" placeholder="Phone Number"/>
+                </mat-form-field>
+            </div>
+  
+            <div class="form-group">
+                <mat-form-field>
+                  <input matInput formControlName="phone3" placeholder="Phone Number"/>
+                </mat-form-field>
+            </div>
+            
+            <div class="form-group">
+                <mat-form-field>
+                  <input matInput formControlName="address" placeholder="Address"/>
+                </mat-form-field>
+            </div>
+  
+            <div class="form-group">
+                <mat-form-field>
+                  <input matInput formControlName="city" placeholder="City"/>
+                </mat-form-field>
+            </div>
+            
+            
+            <!-- <div class="form-group">
+                <input type="text" class="form-control form-input" type="text" formControlName="lastName" placeholder="last name.."/>
+            </div>
+            <div class="form-group">
+                <input type="tel" class="form-control form-input" type="text" formControlName="phone1"  placeholder="phone number.."/>
+            </div>
+            <div class="form-group">
+                <input type="tel" class="form-control form-input" type="text" formControlName="phone2" placeholder="phone number.."/>
+            </div>
+            <div class="form-group">
+                <input type="tel" class="form-control form-input" type="text" formControlName="phone3" placeholder="phone number.."/>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control form-input" type="text" formControlName="address" placeholder="address.."/>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control form-input" type="text" formControlName="city" placeholder="city.."/>
+            </div> -->
+            <div class="form-group">
+                <select formControlName="state">
+  
+                  </select>
+            </div>
+            <div class="form-group">
+                <mat-form-field>
+                  <input matInput formControlName="zip" placeholder="Zip Code"/>
+                </mat-form-field>
+            </div>
+            
+            <!-- <div class="form-group">
+                <input type="number" class="form-control form-input" type="text" formControlName="zip" placeholder="zip.."/>  
+            </div>  -->
+            <div class="form-group">
+              <textarea matInput formControlName="comments" placeholder="Comments"></textarea>
+            </div>
+  
+          <div class="alert-modal-buttons">
+            <button mat-raised-button color="primary" class="alert-modal-button alert-modal-button-success" type="submit">Ask</button>
+            <button mat-raised-button class="alert-modal-button alert-modal-button-failure" type="button"(click)="onCloseCancel()">Cancel</button>
+          </div>
+        </form>
+    </div> 
+      
+  </div>
+  
