@@ -5,6 +5,7 @@ import { CustomerService } from '../services/customer.services';
 import { CustomerInfo } from '../../../sdk/models/CustomerInfo';
 
 import { CustomerInfoAddComponent } from '../customer-info/customer-info-add/customer-info-add-modal.component';
+import { CustomerInfoDetailsComponent } from '../customer-info/customer-info-details/customer-info-details-modal.component';
 
 @Component({
   selector: 'app-customer-info',
@@ -32,6 +33,19 @@ export class CustomerInfoComponent implements OnInit {
   openNewPersonModal(){
     let dialogRef = this.dialog.open(CustomerInfoAddComponent, {
       //data: { categorySlug: categorySlug }
+    });
+
+    dialogRef.afterClosed().subscribe(question => {
+      if(question){
+        //this.addQuestionToList(question);
+        alert("HIT");
+      }
+    })
+  }
+
+  openEditPersonModal(person){
+    let dialogRef = this.dialog.open(CustomerInfoDetailsComponent, {
+      data: { person: person }
     });
 
     dialogRef.afterClosed().subscribe(question => {

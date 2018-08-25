@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { CustomerInfoComponent } from './customer-info/customer-info.component';
 import { CustomerInfoAddComponent } from './customer-info/customer-info-add/customer-info-add-modal.component';
+import { CustomerInfoDetailsComponent } from './customer-info/customer-info-details/customer-info-details-modal.component';
 import { SharedModule } from './shared/shared.module';
 
 import { TestService } from './services/test.services';
@@ -42,6 +43,7 @@ export const appRoutes: Routes = [
     AppComponent,
 		CustomerInfoComponent,
 		CustomerInfoAddComponent,
+		CustomerInfoDetailsComponent,
 		TestComponentComponent
   ],
   imports: [
@@ -53,7 +55,8 @@ export const appRoutes: Routes = [
 	],
 	entryComponents: [
 		CustomerInfoComponent,
-		CustomerInfoAddComponent
+		CustomerInfoAddComponent,
+		CustomerInfoDetailsComponent
 	],
   providers: [
 		TestService,
