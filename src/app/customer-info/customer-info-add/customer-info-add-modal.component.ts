@@ -17,7 +17,6 @@ export class CustomerInfoAddComponent implements OnInit {
   constructor(private router: Router,
     private route: ActivatedRoute,
     public customerService: CustomerService,
-    // private slugifyPipe: SlugifyPipe,
     public thisDialogRef: MatDialogRef<CustomerInfoAddComponent>,
     @Inject(MAT_DIALOG_DATA) public modalData: any,) { }
 

@@ -13,7 +13,7 @@ import { CustomerInfoAddComponent } from '../customer-info/customer-info-add/cus
 })
 export class CustomerInfoComponent implements OnInit {
   data: CustomerInfo[];
-  displayedColumns: string[] = ['firstName', 'lastName'];
+  displayedColumns: string[] = ['firstName', 'lastName', 'phoneNumber1'];
   peopleSource: any;
 
   constructor(
@@ -43,6 +43,10 @@ export class CustomerInfoComponent implements OnInit {
   }
   clickedPerson(person: CustomerInfo){
     alert(person.phoneNumber1);
+  }
+
+  filterTable(filterValue: string) {
+    this.peopleSource.filter = filterValue.trim().toLowerCase();
   }
 
 }
