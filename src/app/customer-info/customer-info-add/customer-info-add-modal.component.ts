@@ -1,8 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, Inject} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Validators, FormGroup, FormControl} from '@angular/forms';
-import { TestService } from '../../services/test.services';
-// import { SlugifyPipe } from '../../shared/slugify.pipe';
+import { CustomerService } from '../../services/customer.services';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
@@ -17,7 +16,7 @@ export class CustomerInfoAddComponent implements OnInit {
 
   constructor(private router: Router,
     private route: ActivatedRoute,
-    public testService: TestService,
+    public customerService: CustomerService,
     // private slugifyPipe: SlugifyPipe,
     public thisDialogRef: MatDialogRef<CustomerInfoAddComponent>,
     @Inject(MAT_DIALOG_DATA) public modalData: any,) { }
@@ -48,11 +47,10 @@ export class CustomerInfoAddComponent implements OnInit {
     data.comments = values.comments;
 
     // //create new question
-    this.testService.insertName(data)
+    this.customerService.insertCustomer(data)
     .then(question => {
       this.thisDialogRef.close(question);
       this.personForm.reset();
-      console.log(this.testService.getNames())
     });
   }
 

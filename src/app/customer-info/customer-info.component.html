@@ -1,26 +1,24 @@
 <div class="app-customer-info">
-    <a routerLink="/test">TestLink</a>
-  customer-info works! YEAH!
-  <button mat-raised-button color="primary" (click)="openNewPersonModal()">New Question</button>
+  <button mat-raised-button color="primary" (click)="openNewPersonModal()">New Person</button><br/><br/>
 
-  <mat-list class="list">
-      <!-- <a *ngFor="let person of data" onclick="clickedPerson(person)">
-          <mat-list-item class="list-item">
-            {{ person.firstName }}
-          </mat-list-item>
-      </a> -->
+  <!-- <mat-list class="list">
       <mat-list-item class="list-item" *ngFor="let person of data"  (click)="clickedPerson(person)">
         {{ person.firstName }}
       </mat-list-item>
-  </mat-list>
+  </mat-list> -->
 
-  <form class="example-form">
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Favorite food" value="Sushi">
-      </mat-form-field>
-    
-      <mat-form-field class="example-full-width">
-        <textarea matInput placeholder="Leave a comment"></textarea>
-      </mat-form-field>
-    </form>
+  <table mat-table [dataSource]="peopleSource" class="mat-elevation-z8">
+    <!-- FirstName Column -->
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef> First Name </th>
+      <td mat-cell *matCellDef="let person"> {{person.firstName}} </td>
+    </ng-container>
+    <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef> Last Name </th>
+        <td mat-cell *matCellDef="let person"> {{person.lastName}} </td>
+      </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let person; columns: displayedColumns;"></tr>
+  </table>
 </div>

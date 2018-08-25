@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource } from '@angular/material';
 import { CustomerService } from '../services/customer.services';
 import { CustomerInfo } from '../../../sdk/models/CustomerInfo';
 
@@ -13,6 +13,8 @@ import { CustomerInfoAddComponent } from '../customer-info/customer-info-add/cus
 })
 export class CustomerInfoComponent implements OnInit {
   data: CustomerInfo[];
+  displayedColumns: string[] = ['firstName', 'lastName'];
+  peopleSource: any;
 
   constructor(
     private router: Router,
@@ -23,8 +25,8 @@ export class CustomerInfoComponent implements OnInit {
 
   ngOnInit() {
     this.customerService.getCustomer()
-    .then(res=> this.data = res);
-    console.log(this.data)
+    .then(res=> this.peopleSource = new MatTableDataSource(res));
+    
   }
 
   openNewPersonModal(){

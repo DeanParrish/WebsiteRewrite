@@ -17,6 +17,8 @@ import {
   MatChipsModule,
   MatInputModule,
   MatMenuModule,
+  MatTableModule,
+  MatTableDataSource
 } from '@angular/material';
 
 //import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
@@ -39,6 +41,8 @@ import {
     MatChipsModule,
     MatInputModule,
     MatMenuModule,
+    MatTableModule,
+    // MatTableDataSource,
     SDKBrowserModule.forRoot(),
     BrowserAnimationsModule
   ],
@@ -59,7 +63,9 @@ import {
     MatButtonModule,
     MatChipsModule,
     MatInputModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTableModule,
+    // MatTableDataSource,
   ]
 })
 export class SharedModule { }
