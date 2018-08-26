@@ -15,6 +15,7 @@ export class CustomerInfoDetailsComponent implements OnInit {
 
   personForm: FormGroup;
   person: CustomerInfo;
+  statesArray = ['Alabama','Alaska','American Samoa','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Federated States of Micronesia','Florida','Georgia','Guam','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Marshall Islands','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Northern Mariana Islands','Ohio','Oklahoma','Oregon','Palau','Pennsylvania','Puerto Rico','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virgin Island','Virginia','Washington','West Virginia','Wisconsin','Wyoming'];
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -45,6 +46,7 @@ export class CustomerInfoDetailsComponent implements OnInit {
       this.personForm.controls["phone3"].setValue(this.modalData.person.phoneNumber3);
       this.personForm.controls["address"].setValue(this.modalData.person.address);
       this.personForm.controls["city"].setValue(this.modalData.person.city);
+      this.personForm.controls["state"].setValue(this.modalData.person.state);
       this.personForm.controls["zip"].setValue(this.modalData.person.zip);
       this.personForm.controls["comments"].setValue(this.modalData.person.comments);
   }
@@ -54,17 +56,25 @@ export class CustomerInfoDetailsComponent implements OnInit {
   }
 
   onSubmit(values){
+    console.log(this.modalData.person.id);
     let data: any = {};
     data.firstName = values.firstName;
     data.lastName = values.lastName;
+    data.phoneNumber1 = values.phone1;
+    data.phoneNumber2 = values.phone2;
+    data.phoneNumber3 = values.phone3;
+    data.address = values.address;
+    data.city = values.city;
+    data.state = values.state;
+    data.zip = values.zip;
     data.comments = values.comments;
 
-    // //create new question
-    this.customerService.insertCustomer(data)
-    .then(question => {
-      this.thisDialogRef.close(question);
-      this.personForm.reset();
-    });
+    //update customer
+    this.customerService.updateCustomer(this.modalData.person.id, data)
+      .then(question => {
+        this.thisDialogRef.close(question);
+        this.personForm.reset();
+      });
   }
 
 }

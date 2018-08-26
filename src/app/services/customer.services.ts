@@ -39,6 +39,6 @@ export class CustomerService{
         data.zip = values.zip;
         data.comments = values.comments;
 
-        return this.customerInfoApi.updateAttributes(id, data);
+        return this.customerInfoApi.updateAttributes(id, data).toPromise();
     }
 }

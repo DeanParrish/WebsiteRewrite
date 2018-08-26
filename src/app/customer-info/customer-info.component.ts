@@ -32,13 +32,14 @@ export class CustomerInfoComponent implements OnInit {
 
   openNewPersonModal(){
     let dialogRef = this.dialog.open(CustomerInfoAddComponent, {
-      //data: { categorySlug: categorySlug }
     });
 
-    dialogRef.afterClosed().subscribe(question => {
-      if(question){
-        //this.addQuestionToList(question);
-        alert("HIT");
+    dialogRef.afterClosed().subscribe(res => {
+      if(res){
+        this.customerService.getCustomer()
+          .then(res => {
+            this.peopleSource = new MatTableDataSource(res)
+          })
       }
     })
   }
@@ -48,10 +49,12 @@ export class CustomerInfoComponent implements OnInit {
       data: { person: person }
     });
 
-    dialogRef.afterClosed().subscribe(question => {
-      if(question){
-        //this.addQuestionToList(question);
-        alert("HIT");
+    dialogRef.afterClosed().subscribe(res => {
+      if(res){
+        this.customerService.getCustomer()
+          .then(res => {
+            this.peopleSource = new MatTableDataSource(res)
+          })
       }
     })
   }
