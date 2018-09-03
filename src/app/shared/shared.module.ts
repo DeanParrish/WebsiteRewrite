@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from "@angular/common/http";
 
 import { SDKBrowserModule } from '../../../sdk/index';
 import { SlugifyPipe } from './slugify.pipe';
@@ -18,7 +19,8 @@ import {
   MatInputModule,
   MatMenuModule,
   MatTableModule,
-  MatTableDataSource
+  MatIconModule,
+  MatTooltipModule
 } from '@angular/material';
 
 //import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
@@ -42,6 +44,9 @@ import {
     MatInputModule,
     MatMenuModule,
     MatTableModule,
+    MatIconModule,
+    MatTooltipModule,
+    HttpClientModule,
     // MatTableDataSource,
     SDKBrowserModule.forRoot(),
     BrowserAnimationsModule
@@ -65,6 +70,9 @@ import {
     MatInputModule,
     MatMenuModule,
     MatTableModule,
+    MatIconModule,
+    MatTooltipModule,
+    HttpClientModule,
     // MatTableDataSource,
   ]
 })

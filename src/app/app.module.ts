@@ -1,8 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-//import { MatDialogModule } from '@angular/material';
-// import { routes } from './app.routes';
 
 import { AppComponent } from './app.component';
 import { CustomerInfoComponent } from './customer-info/customer-info.component';
@@ -64,4 +62,4 @@ export const appRoutes: Routes = [
 	],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource } from '@angular/material';
 import { CustomerService } from '../services/customer.services';
+
 import { CustomerInfo } from '../../../sdk/models/CustomerInfo';
 
 import { CustomerInfoAddComponent } from '../customer-info/customer-info-add/customer-info-add-modal.component';
@@ -21,7 +22,7 @@ export class CustomerInfoComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     public dialog: MatDialog,
-    public customerService: CustomerService,
+    public customerService: CustomerService
   ) { }
 
   ngOnInit() {
