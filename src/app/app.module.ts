@@ -11,11 +11,12 @@ import { SharedModule } from './shared/shared.module';
 import { TestService } from './services/test.services';
 import { CustomerService } from './services/customer.services';
 import { TestComponentComponent } from './test-component/test-component.component';
+import { HomeComponent } from './home/home.component';
 
 export const appRoutes: Routes = [
 	{
 	    path: '',
-	    component: CustomerInfoComponent,
+	    component: HomeComponent,
 		//   resolve: {
 		//     data: CategoriesResolver
 		// 	}
@@ -42,7 +43,8 @@ export const appRoutes: Routes = [
 		CustomerInfoComponent,
 		CustomerInfoAddComponent,
 		CustomerInfoDetailsComponent,
-		TestComponentComponent
+		TestComponentComponent,
+		HomeComponent
   ],
   imports: [
 		BrowserModule,
