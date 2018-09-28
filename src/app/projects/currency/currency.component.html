@@ -1,0 +1,65 @@
+<!-- <p>
+  currency works!
+</p> -->
+<mat-tab-group>
+  <mat-tab label="Value">
+    <i>* all values are based on 1 Euro</i>
+    <table mat-table [dataSource]="source" class="mat-elevation-z8">
+      <ng-container matColumnDef="currency">
+        <th mat-header-cell *matHeaderCellDef> Currency </th>
+        <td mat-cell *matCellDef="let curr"> {{curr.currency}} </td>
+      </ng-container>
+      <ng-container matColumnDef="value">
+        <th mat-header-cell *matHeaderCellDef> Value </th>
+        <td mat-cell *matCellDef="let curr"> {{curr.value}} </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row  (click)="console.log(person)" *matRowDef="let person; columns: displayedColumns;"></tr>
+    </table>
+    <p>...</p>
+  </mat-tab>
+  <mat-tab label="Historical">
+    <i>* all values are based on 1 Euro</i><br/>
+    <mat-form-field>
+      <mat-select placeholder="Currency" (selectionChange)="currencyHistoryChange($event.value)" [(ngModel)]="historicalCurrency">
+        <mat-option *ngFor="let curr of currencyObjectList" [value]="curr.currency">
+          {{curr.currency}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date" (dateChange)="currencyHistoryDateChange()" [(ngModel)]="historicalDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+      <canvas #testChart>{{ chart }}</canvas>
+  </mat-tab>
+  <mat-tab label="Convert">
+    <i>* all values are based on 1 Euro</i>
+    <br/>
+    <mat-form-field>
+      <mat-select placeholder="Currency From" [(ngModel)]="convertCurrencyFrom">
+        <mat-option *ngFor="let curr of currencyObjectList" [value]="curr.currency">
+          {{curr.currency}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br/>
+    <mat-form-field>
+      <mat-select placeholder="Currency To"  [(ngModel)]="convertCurrencyTo">
+        <mat-option *ngFor="let curr of currencyObjectList" [value]="curr.currency">
+          {{curr.currency}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br/>
+    <mat-form-field>
+      <input matInput type="number" placeholder="Amount to convert" [(ngModel)]="convertAmount">
+    </mat-form-field>
+    <br/>
+    <button mat-button (click)="convertCurrency()">Convert</button>
+    <br/>
+    <label>{{ convertResult }}</label>
+  </mat-tab>
+</mat-tab-group>

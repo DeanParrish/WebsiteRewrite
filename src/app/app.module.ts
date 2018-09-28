@@ -12,29 +12,42 @@ import { TestService } from './services/test.services';
 import { CustomerService } from './services/customer.services';
 import { TestComponentComponent } from './test-component/test-component.component';
 import { HomeComponent } from './home/home.component';
+import { ProjectsComponent } from './projects/projects.component';
+import { DaycounterComponent } from './projects/daycounter/daycounter.component';
+import { CurrencyComponent } from './projects/currency/currency.component';
 
 export const appRoutes: Routes = [
 	{
 	    path: '',
 	    component: HomeComponent,
-		//   resolve: {
-		//     data: CategoriesResolver
-		// 	}
+	},
+	{
+		path: 'home',
+		component: HomeComponent,
+	},	
+	{
+		path: 'projects',
+		component: ProjectsComponent,
+	},	
+	{
+		path: 'projects/daycounter',
+		component: DaycounterComponent,
+	},
+	{
+		path: 'projects/currencyconverter',
+		component: CurrencyComponent,
+
 	},
 	{
 	    path: 'customerinfo',
 	    component: CustomerInfoComponent,
-	    // resolve: {
-	    //   data: CategoryQuestionsResolver
-	  	// }
 	},
 	{
 		path: 'test',
 		component: TestComponentComponent,
-		// resolve: {
-		//   data: CategoryQuestionsResolver
-		// }
+
 },
+
 ];
 
 @NgModule({
@@ -44,7 +57,10 @@ export const appRoutes: Routes = [
 		CustomerInfoAddComponent,
 		CustomerInfoDetailsComponent,
 		TestComponentComponent,
-		HomeComponent
+		HomeComponent,
+		ProjectsComponent,
+		DaycounterComponent,
+		CurrencyComponent
   ],
   imports: [
 		BrowserModule,

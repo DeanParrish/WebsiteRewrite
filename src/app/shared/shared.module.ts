@@ -20,7 +20,12 @@ import {
   MatMenuModule,
   MatTableModule,
   MatIconModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatRadioModule,
+  MatTabsModule,
+  MatSelectModule,
 } from '@angular/material';
 
 //import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
@@ -47,7 +52,11 @@ import {
     MatIconModule,
     MatTooltipModule,
     HttpClientModule,
-    // MatTableDataSource,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRadioModule,
+    MatTabsModule,
+    MatSelectModule,
     SDKBrowserModule.forRoot(),
     BrowserAnimationsModule
   ],
@@ -73,7 +82,11 @@ import {
     MatIconModule,
     MatTooltipModule,
     HttpClientModule,
-    // MatTableDataSource,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatTabsModule,
   ]
 })
 export class SharedModule { }

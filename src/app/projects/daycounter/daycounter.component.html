@@ -1,0 +1,34 @@
+
+    <mat-radio-group class="example-radio-group" [(ngModel)]="comparisonType" (change)="comparisonChange()"> 
+      <mat-radio-button class="example-radio-button" value="endOfYear">
+        end of year
+      </mat-radio-button>
+      <mat-radio-button class="example-radio-button" value="specificDate">
+          specific Date
+        </mat-radio-button>
+    </mat-radio-group>
+<form [formGroup]="dateCounterForm" class="form" (ngSubmit)="onSubmit(dateCounterForm.value)"> 
+    <mat-form-field>
+        <input formControlName="enterDate" matInput [matDatepicker]="dateEnter" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="dateEnter"></mat-datepicker-toggle>
+        <mat-datepicker #dateEnter></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+          <input formControlName="endDate" matInput [matDatepicker]="dateEnd" placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="dateEnd"></mat-datepicker-toggle>
+          <mat-datepicker #dateEnd></mat-datepicker>
+        </mat-form-field>
+  
+    <!-- <div class="form-group">
+        <mat-form-field>
+          <input matInput formControlName="lastName" placeholder="Last Name"/>
+        </mat-form-field>
+    </div> -->
+    <div>
+        <button mat-raised-button color="primary" class="alert-modal-button alert-modal-button-success" type="submit">Calculate</button>
+    </div>
+    
+    
+</form>
+<span id="spanCalculatedDays">{{returnText}}</span>
