@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module';
 
 import { TestService } from './services/test.services';
 import { CustomerService } from './services/customer.services';
+import {CustomerDataService } from './services/customer-data.service';
 import { TestComponentComponent } from './test-component/test-component.component';
 import { HomeComponent } from './home/home.component';
 import { ProjectsComponent } from './projects/projects.component';
@@ -76,7 +77,8 @@ export const appRoutes: Routes = [
 	],
   providers: [
 		TestService,
-		CustomerService
+		CustomerService,
+		CustomerDataService
 	],
   bootstrap: [AppComponent]
 })

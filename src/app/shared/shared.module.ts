@@ -7,8 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from "@angular/common/http";
 
 import { SDKBrowserModule } from '../../../sdk/index';
-import { SlugifyPipe } from './slugify.pipe';
-// import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+//import { SlugifyPipe } from './slugify.pipe';
 // Material modules
 import {
   MatDialogModule,
@@ -58,10 +57,11 @@ import {
     MatTabsModule,
     MatSelectModule,
     SDKBrowserModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    //SlugifyPipe
   ],
   providers: [
-    SlugifyPipe
+    //SlugifyPipe
   ],
   exports: [
     // BreadcrumbComponent,

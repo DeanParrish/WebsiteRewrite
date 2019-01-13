@@ -1,7 +1,8 @@
 import { Component, OnInit, EventEmitter, Output, Inject} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Validators, FormGroup, FormControl} from '@angular/forms';
-import { CustomerService } from '../../services/customer.services';
+//import { CustomerService } from '../../services/customer.services';
+import { CustomerDataService } from '../../services/customer-data.service';
 import { CustomerInfo } from '../../../../sdk/models/CustomerInfo';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
@@ -14,16 +15,18 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 export class CustomerInfoDetailsComponent implements OnInit {
 
   personForm: FormGroup;
-  person: CustomerInfo;
+  person: any;
   statesArray = ['Alabama','Alaska','American Samoa','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Federated States of Micronesia','Florida','Georgia','Guam','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Marshall Islands','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Northern Mariana Islands','Ohio','Oklahoma','Oregon','Palau','Pennsylvania','Puerto Rico','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virgin Island','Virginia','Washington','West Virginia','Wisconsin','Wyoming'];
 
   constructor(private router: Router,
     private route: ActivatedRoute,
-    public customerService: CustomerService,
+    public customerService: CustomerDataService,
     public thisDialogRef: MatDialogRef<CustomerInfoDetailsComponent>,
     @Inject(MAT_DIALOG_DATA) public modalData: any,) { }
 
   ngOnInit() {
+    this.person = this.modalData.person;
+
     this.personForm = new FormGroup({
       firstName: new FormControl(),
       lastName: new FormControl(),
@@ -56,7 +59,7 @@ export class CustomerInfoDetailsComponent implements OnInit {
   }
 
   onSubmit(values){
-    console.log(this.modalData.person.id);
+    console.log(this.person);
     let data: any = {};
     data.firstName = values.firstName;
     data.lastName = values.lastName;
@@ -70,11 +73,21 @@ export class CustomerInfoDetailsComponent implements OnInit {
     data.comments = values.comments;
 
     //update customer
-    this.customerService.updateCustomer(this.modalData.person.id, data)
-      .then(question => {
-        this.thisDialogRef.close(question);
-        this.personForm.reset();
-      });
+    this.customerService.updateCustomer(this.person._id, data)
+    .subscribe(res=> {
+      console.log(res);
+      console.log("dialog" + this.thisDialogRef);
+      this.thisDialogRef.close(res);
+    this.personForm.reset();
+    return res;
+      //console.log("customerinfo: " + JSON.stringify(res))
+    });
+
+    
+      // .then(question => {
+      //   this.thisDialogRef.close(question);
+      //   this.personForm.reset();
+      // });
   }
 
 }

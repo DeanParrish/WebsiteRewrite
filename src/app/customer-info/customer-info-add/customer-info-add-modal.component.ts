@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, Inject} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Validators, FormGroup, FormControl} from '@angular/forms';
-import { CustomerService } from '../../services/customer.services';
+import { CustomerDataService } from '../../services/customer-data.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
@@ -19,7 +19,7 @@ export class CustomerInfoAddComponent implements OnInit {
 
   constructor(private router: Router,
     private route: ActivatedRoute,
-    public customerService: CustomerService,
+    public customerService: CustomerDataService,
     public thisDialogRef: MatDialogRef<CustomerInfoAddComponent>,
     @Inject(MAT_DIALOG_DATA) public modalData: any,) { }
 
@@ -54,13 +54,23 @@ export class CustomerInfoAddComponent implements OnInit {
     data.state = values.state;
     data.zip = values.zip;
     data.comments = values.comments;
-
+    console.log("submit")
     // //create new question
     this.customerService.insertCustomer(data)
-    .then(question => {
-      this.thisDialogRef.close(question);
-      this.personForm.reset();
+    .subscribe(res=> {
+      console.log(res);
+      console.log("dialog" + this.thisDialogRef);
+      this.thisDialogRef.close(res)
+    this.personForm.reset();
+   // return res;
+      //console.log("customerinfo: " + JSON.stringify(res))
     });
+
+    
+    // .then(question => {
+    //   this.thisDialogRef.close(question);
+    //   this.personForm.reset();
+    // });
   }
 
 }
