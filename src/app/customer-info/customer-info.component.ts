@@ -3,7 +3,6 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource } from '@angular/material';
 import { CustomerDataService } from '../services/customer-data.service';
 
-//import { CustomerInfo } from '../../../sdk/models/CustomerInfo';
 import { CustomerInfo } from './../services/Models/CustomerInfo';
 
 import { CustomerInfoAddComponent } from '../customer-info/customer-info-add/customer-info-add-modal.component';

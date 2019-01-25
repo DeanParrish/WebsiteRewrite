@@ -3,7 +3,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Validators, FormGroup, FormControl} from '@angular/forms';
 //import { CustomerService } from '../../services/customer.services';
 import { CustomerDataService } from '../../services/customer-data.service';
-import { CustomerInfo } from '../../../../sdk/models/CustomerInfo';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({

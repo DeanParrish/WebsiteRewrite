@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from "@angular/common/http";
 
-import { SDKBrowserModule } from '../../../sdk/index';
+// import { SDKBrowserModule } from '../../../sdk/index';
 //import { SlugifyPipe } from './slugify.pipe';
 // Material modules
 import {
@@ -56,7 +56,7 @@ import {
     MatRadioModule,
     MatTabsModule,
     MatSelectModule,
-    SDKBrowserModule.forRoot(),
+    // SDKBrowserModule.forRoot(),
     BrowserAnimationsModule,
     //SlugifyPipe
   ],
