@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { CustomerInfoComponent } from './customer-info/customer-info.component';
 import { TestComponentComponent } from './test-component/test-component.component';
+import { ContactComponent } from './contact/contact.component';
 
 export const routes: Routes = [
 	{
@@ -18,8 +19,8 @@ export const routes: Routes = [
 	  	// }
 	},
 	{
-	    path: 'test',
-	    component: TestComponentComponent,
+	    path: 'contact',
+	    component: ContactComponent,
 	    // resolve: {
 	    //   data: CategoryQuestionsResolver
 	  	// }

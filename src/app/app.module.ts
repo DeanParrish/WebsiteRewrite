@@ -16,6 +16,7 @@ import { HomeComponent } from './home/home.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { DaycounterComponent } from './projects/daycounter/daycounter.component';
 import { CurrencyComponent } from './projects/currency/currency.component';
+import { ContactComponent } from './contact/contact.component';
 
 export const appRoutes: Routes = [
 	{
@@ -44,8 +45,8 @@ export const appRoutes: Routes = [
 	    component: CustomerInfoComponent,
 	},
 	{
-		path: 'test',
-		component: TestComponentComponent,
+		path: 'contact',
+		component: ContactComponent,
 
 },
 
@@ -61,7 +62,8 @@ export const appRoutes: Routes = [
 		HomeComponent,
 		ProjectsComponent,
 		DaycounterComponent,
-		CurrencyComponent
+		CurrencyComponent,
+		ContactComponent
   ],
   imports: [
 		BrowserModule,

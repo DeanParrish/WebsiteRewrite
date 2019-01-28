@@ -1,0 +1,18 @@
+.root{
+    padding: 3%;
+}
+.contactDiv{
+    border-bottom: 2px black solid;
+    padding-bottom: 3%;
+}
+.svg24{
+    max-width: 24px !important;
+    margin-right: 10px
+}
+.svg22{
+    max-width: 22px !important;
+    margin-right: 10px
+}
+.svg20{
+    max-width: 20px !important;
+}
