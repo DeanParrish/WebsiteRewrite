@@ -8,8 +8,6 @@ import { CustomerInfoAddComponent } from './customer-info/customer-info-add/cust
 import { CustomerInfoDetailsComponent } from './customer-info/customer-info-details/customer-info-details-modal.component';
 import { SharedModule } from './shared/shared.module';
 
-import { TestService } from './services/test.services';
-import { CustomerService } from './services/customer.services';
 import {CustomerDataService } from './services/customer-data.service';
 import { TestComponentComponent } from './test-component/test-component.component';
 import { HomeComponent } from './home/home.component';
@@ -78,8 +76,6 @@ export const appRoutes: Routes = [
 		CustomerInfoDetailsComponent
 	],
   providers: [
-		TestService,
-		CustomerService,
 		CustomerDataService
 	],
   bootstrap: [AppComponent]
