@@ -108,4 +108,34 @@ router.put("/updatecustomer/:id", (req, res) => {
     
 });
 
+router.post("/deletecustomer/:id", (req, res) => {
+    connection((db) => {
+        console.log(req.body);
+        //console.log(req)
+        // User.findByIdAndUpdate(req.params.id, req.body)
+        // .then(item => {
+        //     response.data = item;
+        //     res.json(response);
+        // })
+        // .catch(err => {
+        //     console.log("not saved")
+        //     sendError(err, res);
+        // //res.status(400).send("unable to save to database");
+        // });
+        User.deleteOne({_id: req.params.id})
+            .then(item => {
+                response.data = item;
+                res.json(response);
+            })
+            .catch(err => {
+                console.log("not deleted")
+                sendError(err, res);
+            //res.status(400).send("unable to save to database");
+            });
+        res.data = "in delete";
+    });
+         
+    
+});
+
 module.exports = router;

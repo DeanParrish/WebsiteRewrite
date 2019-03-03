@@ -99,9 +99,28 @@ export class CustomerInfoComponent implements OnInit {
       }
     })
   }
-  // clickedPerson(person: CustomerInfo){
-  //   alert(person.phoneNumber1);
-  // }
+
+  deleteCustomer(person){
+    console.log("delete: " + JSON.stringify(person));
+
+    let data: any = {};
+
+    this.customerService.deleteCustomer(person._id)
+    .subscribe(res=> {
+      console.log(res);
+      this.customerService.getCustomer()
+          .subscribe(res => {
+            if(res.status == 200){
+              this.peopleSource = new MatTableDataSource(res.data)
+              this.allData = new MatTableDataSource(res.data)
+            }
+            
+          })
+    return res;
+      //console.log("customerinfo: " + JSON.stringify(res))
+    });
+  }
+
 
   filterTable(filterValue: string) {
     console.log(filterValue.trim().toLowerCase());
