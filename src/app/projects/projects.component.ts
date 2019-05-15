@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 //import { Parser } from '../../../node_modules/dbf-parser';
+import { Title  } from "@angular/platform-browser";
 
 @Component({
   selector: 'app-projects',
@@ -8,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private titleService: Title) { 
+    this.titleService.setTitle("Dean Parrish - Projects")
+  }
 
   ngOnInit() {
     //var Parser = require('node-dbf');

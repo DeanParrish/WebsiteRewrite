@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { CurrencyResult } from './CurrencyList';
 import { MatTableDataSource } from '@angular/material';
 import { Chart } from 'chart.js';
+import { Title  } from "@angular/platform-browser";
 
 @Component({
   selector: 'app-currency',
@@ -28,7 +29,7 @@ export class CurrencyComponent implements OnInit  {
   chart: any;
   displayedColumns: string[] = ['currency', 'value'];
 
-  constructor(private httpClient: HttpClient,private elementRef: ElementRef) { 
+  constructor(private httpClient: HttpClient,private elementRef: ElementRef,private titleService: Title) { 
     this.httpClient.get<CurrencyResult>(this._urlLatest)
       .subscribe(res => {  
         this.currencyList = res;
@@ -40,6 +41,8 @@ export class CurrencyComponent implements OnInit  {
         }
         this.source = new MatTableDataSource(this.currencyObjectList);
       });
+
+      this.titleService.setTitle("Dean Parrish - Currency Conversion")
 
   }
 

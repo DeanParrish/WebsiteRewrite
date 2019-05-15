@@ -47,16 +47,23 @@ var User = mongoose.model("customerInfo", userSchema);
 // Get users
 router.get('/users', (req, res) => {
     connection((db) => {
-        db.collection('customerinfos')
-            .find()
-            .toArray()
-            .then((users) => {
+        // db.collection('customerinfos')
+        //     .find()
+                       
+        //     .toArray()
+        //     .then((users) => {
+        //         response.data = users;
+        //         res.json(response);
+        //     })
+        //     .catch((err) => {
+        //         sendError(err, res);
+        //     });
+        User.find({}).sort("firstName")
+            .then(users => {
                 response.data = users;
                 res.json(response);
             })
-            .catch((err) => {
-                sendError(err, res);
-            });
+            .catch(err => sendError(err, res));
     });
 });
 

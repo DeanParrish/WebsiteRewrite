@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource, MatSort } from '@angular/material';
 import { CustomerDataService } from '../services/customer-data.service';
+import { Title  } from "@angular/platform-browser";
 
 import { CustomerInfoAddComponent } from '../customer-info/customer-info-add/customer-info-add-modal.component';
 import { CustomerInfoDetailsComponent } from '../customer-info/customer-info-details/customer-info-details-modal.component';
@@ -22,8 +23,11 @@ export class CustomerInfoComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     public dialog: MatDialog,
-    public customerService: CustomerDataService
-  ) { }
+    public customerService: CustomerDataService,
+    private titleService: Title
+  ) {
+    this.titleService.setTitle("Dean Parrish - Customer Info")
+   }
 
   ngOnInit() {
     this.customerService.getCustomer()
@@ -32,6 +36,7 @@ export class CustomerInfoComponent implements OnInit {
       if(res.status == 200){
         this.peopleSource = new MatTableDataSource(res.data)
         this.allData = new MatTableDataSource(res.data)
+        console.log(this.allData);
       }
       //console.log("customerinfo: " + JSON.stringify(res))
     });
