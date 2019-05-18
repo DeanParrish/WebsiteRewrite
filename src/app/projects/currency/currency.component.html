@@ -4,7 +4,7 @@
     <table mat-table [dataSource]="source" class="mat-elevation-z8">
       <ng-container matColumnDef="currency">
         <th mat-header-cell *matHeaderCellDef> Currency </th>
-        <td mat-cell *matCellDef="let curr"> {{curr.currency}} </td>
+        <td mat-cell *matCellDef="let curr"> {{curr.currencyText}} </td>
       </ng-container>
       <ng-container matColumnDef="value">
         <th mat-header-cell *matHeaderCellDef> Value </th>
@@ -21,7 +21,7 @@
     <mat-form-field>
       <mat-select placeholder="Currency" (selectionChange)="currencyHistoryChange($event.value)" [(ngModel)]="historicalCurrency">
         <mat-option *ngFor="let curr of currencyObjectList" [value]="curr.currency">
-          {{curr.currency}}
+          {{curr.currencyText}}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -39,7 +39,7 @@
         <mat-form-field>
           <mat-select placeholder="Currency From" [(ngModel)]="convertCurrencyFrom">
             <mat-option *ngFor="let curr of currencyObjectList" [value]="curr.currency">
-              {{curr.currency}}
+              {{curr.currencyText}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -47,7 +47,7 @@
         <mat-form-field>
           <mat-select placeholder="Currency To"  [(ngModel)]="convertCurrencyTo">
             <mat-option *ngFor="let curr of currencyObjectList" [value]="curr.currency">
-              {{curr.currency}}
+              {{curr.currencyText}}
             </mat-option>
           </mat-select>
         </mat-form-field>
