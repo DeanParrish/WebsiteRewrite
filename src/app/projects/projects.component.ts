@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 //import { Parser } from '../../../node_modules/dbf-parser';
 import { Title  } from "@angular/platform-browser";
+import {NavbarComponent} from '../elements/navbar/navbar.component'
 
 @Component({
   selector: 'app-projects',
@@ -9,8 +10,9 @@ import { Title  } from "@angular/platform-browser";
 })
 export class ProjectsComponent implements OnInit {
 
-  constructor(private titleService: Title) { 
+  constructor(private titleService: Title, private navBar: NavbarComponent) { 
     this.titleService.setTitle("Dean Parrish - Projects")
+    this.navBar.activeNode = "Projects";
   }
 
   ngOnInit() {
