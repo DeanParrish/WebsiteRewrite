@@ -16,6 +16,7 @@ import { DaycounterComponent } from './projects/daycounter/daycounter.component'
 import { CurrencyComponent } from './projects/currency/currency.component';
 import { ContactComponent } from './contact/contact.component';
 import { NavbarComponent } from './elements/navbar/navbar.component';
+//import { HomepagePipe } from './homepage.pipe';
 
 export const appRoutes: Routes = [
 	{
@@ -63,7 +64,8 @@ export const appRoutes: Routes = [
 		DaycounterComponent,
 		CurrencyComponent,
 		ContactComponent,
-		NavbarComponent
+		NavbarComponent,
+		//HomepagePipe
   ],
   imports: [
 		BrowserModule,
