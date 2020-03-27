@@ -27,7 +27,7 @@ let response = {
 
 
 var mongoose = require("mongoose");
-mongoose.Promise = global.Promise;mongoose.connect("mongodb://localhost:27017/test");
+mongoose.Promise = global.Promise;mongoose.connect("mongodb://localhost:27017/test", {useNewUrlParser: true});
 
 var userSchema = new mongoose.Schema({
     firstName: String,
@@ -47,17 +47,6 @@ var User = mongoose.model("customerInfo", userSchema);
 // Get users
 router.get('/users', (req, res) => {
     connection((db) => {
-        // db.collection('customerinfos')
-        //     .find()
-                       
-        //     .toArray()
-        //     .then((users) => {
-        //         response.data = users;
-        //         res.json(response);
-        //     })
-        //     .catch((err) => {
-        //         sendError(err, res);
-        //     });
         User.find({}).sort("firstName")
             .then(users => {
                 response.data = users;
@@ -80,26 +69,13 @@ router.post('/insertuser', (req, res) => {
             .catch(err => {
                 console.log("not saved")
                 sendError(err, res);
-            //res.status(400).send("unable to save to database");
             });
     });
 });
 
 router.put("/updatecustomer/:id", (req, res) => {
     connection((db) => {
-        console.log(req.body);
-        //console.log(req)
-        // User.findByIdAndUpdate(req.params.id, req.body)
-        // .then(item => {
-        //     response.data = item;
-        //     res.json(response);
-        // })
-        // .catch(err => {
-        //     console.log("not saved")
-        //     sendError(err, res);
-        // //res.status(400).send("unable to save to database");
-        // });
-        User.update({_id: req.params.id}, req.body,{upsert: true})
+        User.updateOne({_id: req.params.id}, req.body,{upsert: true})
             .then(item => {
                 response.data = item;
                 res.json(response);
@@ -107,7 +83,6 @@ router.put("/updatecustomer/:id", (req, res) => {
             .catch(err => {
                 console.log("not saved")
                 sendError(err, res);
-            //res.status(400).send("unable to save to database");
             });
         res.data = "in update";
     });
@@ -118,17 +93,6 @@ router.put("/updatecustomer/:id", (req, res) => {
 router.post("/deletecustomer/:id", (req, res) => {
     connection((db) => {
         console.log(req.body);
-        //console.log(req)
-        // User.findByIdAndUpdate(req.params.id, req.body)
-        // .then(item => {
-        //     response.data = item;
-        //     res.json(response);
-        // })
-        // .catch(err => {
-        //     console.log("not saved")
-        //     sendError(err, res);
-        // //res.status(400).send("unable to save to database");
-        // });
         User.deleteOne({_id: req.params.id})
             .then(item => {
                 response.data = item;
@@ -137,7 +101,6 @@ router.post("/deletecustomer/:id", (req, res) => {
             .catch(err => {
                 console.log("not deleted")
                 sendError(err, res);
-            //res.status(400).send("unable to save to database");
             });
         res.data = "in delete";
     });

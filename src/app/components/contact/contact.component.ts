@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatIconRegistry } from "@angular/material/icon";
 import { Title  } from "@angular/platform-browser";
-import {NavbarComponent} from '../elements/navbar/navbar.component'
+import {NavbarComponent} from '../../elements/navbar/navbar.component'
 
 @Component({
   selector: 'app-contact',
