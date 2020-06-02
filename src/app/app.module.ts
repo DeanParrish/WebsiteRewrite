@@ -18,6 +18,7 @@ import { CurrencyComponent } from './/components/projects/currency/currency.comp
 import { ContactComponent } from './components/contact/contact.component';
 import { NavbarComponent } from './elements/navbar/navbar.component';
 import { InterativethumbnailComponent } from './components/interativethumbnail/interativethumbnail.component';
+import { RecipepopupComponent } from './components/recipes/recipepopup/recipepopup.component';
 //import { HomepagePipe } from './homepage.pipe';
 
 export const appRoutes: Routes = [
@@ -73,7 +74,8 @@ export const appRoutes: Routes = [
 		ContactComponent,
 		RecipesComponent,
 		NavbarComponent,
-		InterativethumbnailComponent
+		InterativethumbnailComponent,
+		RecipepopupComponent
   ],
   imports: [
 		BrowserModule,
@@ -86,7 +88,7 @@ export const appRoutes: Routes = [
 		CustomerInfoComponent,
 		CustomerInfoAddComponent,
 		CustomerInfoDetailsComponent,
-		//NavbarComponent
+		RecipepopupComponent
 	],
   providers: [
 		CustomerDataService,
