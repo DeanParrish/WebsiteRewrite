@@ -20,8 +20,6 @@ app.use('/api', api);
 
 // Send all other requests to the Angular app
 app.get('*', (req, res) => {
-    //console.log(res);
-    //res.redirect("/");
     res.sendFile(path.join(__dirname, 'dist/my-test-angular-app/index.html'));
 });
 

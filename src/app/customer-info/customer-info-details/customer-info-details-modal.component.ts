@@ -89,4 +89,25 @@ export class CustomerInfoDetailsComponent implements OnInit {
       // });
   }
 
+  deleteCustomer(person){
+    console.log("delete: " + JSON.stringify(person));
+
+    let data: any = {};
+
+    this.customerService.deleteCustomer(person._id)
+    .subscribe(res=> {
+      console.log(res);
+      this.customerService.getCustomer()
+          .subscribe(res => {
+            if(res.status == 200){
+              this.thisDialogRef.close(res);
+              this.personForm.reset();
+            }
+            return res;
+          })
+    
+      //console.log("customerinfo: " + JSON.stringify(res))
+    });
+  }
+
 }

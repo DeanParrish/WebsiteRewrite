@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl} from '@angular/forms';
+import { Title  } from "@angular/platform-browser";
 
 @Component({
   selector: 'app-daycounter',
@@ -11,7 +12,9 @@ export class DaycounterComponent implements OnInit {
   dateCounterForm: FormGroup;
   returnText: string;
   comparisonType: string;
-  constructor() { }
+  constructor(private titleService: Title) { 
+    this.titleService.setTitle("Dean Parrish - Day Counter")
+  }
 
   ngOnInit() {
     this.dateCounterForm = new FormGroup({

@@ -72,4 +72,26 @@ updateCustomer(id, values){
     }))
     //return this.customerInfoApi.updateAttributes(id, data).toPromise();
 }
+
+deleteCustomer(id){
+  let data: any = {};
+    // data.firstName = values.firstName;
+    // data.lastName = values.lastName;
+    // data.phoneNumber1 = values.phoneNumber1;
+    // data.phoneNumber2 = values.phoneNumber2;
+    // data.phoneNumber3 = values.phoneNumber3;
+    // data.address = values.address;
+    // data.city = values.city;
+    // data.state = values.state;
+    // data.zip = values.zip;
+    // data.comments = values.comments;
+
+  var url = "/api/deletecustomer/" + id;
+
+  return this._http.post(url, id)
+        .pipe(map((response: Response) => {
+          console.log(response)
+          return response;
+      }))
+}
 }

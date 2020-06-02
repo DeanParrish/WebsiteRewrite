@@ -5,6 +5,10 @@
   a:hover {
     text-decoration: none;
   }
+
+  div.row{
+    margin-top: 75px;
+  }
   
   /**
    * Tooltip Styles

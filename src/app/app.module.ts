@@ -10,12 +10,15 @@ import { SharedModule } from './shared/shared.module';
 
 import {CustomerDataService } from './services/customer-data.service';
 import { TestComponentComponent } from './test-component/test-component.component';
-import { HomeComponent } from './home/home.component';
-import { ProjectsComponent } from './projects/projects.component';
-import { DaycounterComponent } from './projects/daycounter/daycounter.component';
-import { CurrencyComponent } from './projects/currency/currency.component';
-import { ContactComponent } from './contact/contact.component';
-import { RecipesComponent } from './recipes/recipes.component';
+import { RecipesComponent } from './components/recipes/recipes.component';
+import { HomeComponent } from './components/home/home.component';
+import { ProjectsComponent } from './components/projects/projects.component';
+import { DaycounterComponent } from './/components/projects/daycounter/daycounter.component';
+import { CurrencyComponent } from './/components/projects/currency/currency.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { NavbarComponent } from './elements/navbar/navbar.component';
+import { InterativethumbnailComponent } from './components/interativethumbnail/interativethumbnail.component';
+//import { HomepagePipe } from './homepage.pipe';
 
 export const appRoutes: Routes = [
 	{
@@ -68,7 +71,9 @@ export const appRoutes: Routes = [
 		DaycounterComponent,
 		CurrencyComponent,
 		ContactComponent,
-		RecipesComponent
+		RecipesComponent,
+		NavbarComponent,
+		InterativethumbnailComponent
   ],
   imports: [
 		BrowserModule,
@@ -80,10 +85,12 @@ export const appRoutes: Routes = [
 	entryComponents: [
 		CustomerInfoComponent,
 		CustomerInfoAddComponent,
-		CustomerInfoDetailsComponent
+		CustomerInfoDetailsComponent,
+		//NavbarComponent
 	],
   providers: [
-		CustomerDataService
+		CustomerDataService,
+		NavbarComponent
 	],
   bootstrap: [AppComponent]
 })
