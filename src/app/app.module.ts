@@ -15,6 +15,7 @@ import { ProjectsComponent } from './projects/projects.component';
 import { DaycounterComponent } from './projects/daycounter/daycounter.component';
 import { CurrencyComponent } from './projects/currency/currency.component';
 import { ContactComponent } from './contact/contact.component';
+import { RecipesComponent } from './recipes/recipes.component';
 
 export const appRoutes: Routes = [
 	{
@@ -46,7 +47,12 @@ export const appRoutes: Routes = [
 		path: 'contact',
 		component: ContactComponent,
 
-},
+	},
+	{
+		path: 'recipes',
+		component: RecipesComponent,
+
+	},
 
 ];
 
@@ -61,7 +67,8 @@ export const appRoutes: Routes = [
 		ProjectsComponent,
 		DaycounterComponent,
 		CurrencyComponent,
-		ContactComponent
+		ContactComponent,
+		RecipesComponent
   ],
   imports: [
 		BrowserModule,

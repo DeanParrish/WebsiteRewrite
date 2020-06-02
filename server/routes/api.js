@@ -108,4 +108,33 @@ router.put("/updatecustomer/:id", (req, res) => {
     
 });
 
+//BEGIN RECIPE
+
+
+var recipeSchema = new mongoose.Schema({
+    name: String,
+    category: String,
+    ingredients: Array,
+    steps: Array,
+    link: String
+});
+
+var Recipe = mongoose.model("recipes", recipeSchema);
+
+// Get users
+router.get('/recipes', (req, res) => {
+    connection((db) => {
+        db.collection('recipes')
+            .find()
+            .toArray()
+            .then((recipes) => {
+                response.data = recipes;
+                res.json(response);
+            })
+            .catch((err) => {
+                sendError(err, res);
+            });
+    });
+});
+
 module.exports = router;
