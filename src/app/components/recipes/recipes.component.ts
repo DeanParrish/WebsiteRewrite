@@ -18,8 +18,6 @@ export class RecipesComponent implements OnInit {
   categories: string[] = [];
   categorySelected: string;
 
-  
-
   constructor(public recipeService: RecipeDataService, public dialog: MatDialog) { }
 
   ngOnInit() {

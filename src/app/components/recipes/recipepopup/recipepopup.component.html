@@ -4,12 +4,12 @@
 
   <b>Ingredients:</b>
   <ul>
-    <li *ngFor="let ingredient of this.data.ingredients">{{ingredient}}</li>
+    <li *ngFor="let ingredient of this.data.ingredients">{{ingredient.ingredientName}}</li>
   </ul>
 
   <b>Steps:</b>
   <ul>
-    <li *ngFor="let step of this.data.steps">{{step}}</li>
+    <li *ngFor="let step of this.data.steps">{{step.stepInfo}}</li>
   </ul>
 
   Link Source: {{this.data.link}}

@@ -19,6 +19,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { NavbarComponent } from './elements/navbar/navbar.component';
 import { InterativethumbnailComponent } from './components/interativethumbnail/interativethumbnail.component';
 import { RecipepopupComponent } from './components/recipes/recipepopup/recipepopup.component';
+import { AddrecipeComponent } from './components/recipes/addrecipe/addrecipe.component';
 //import { HomepagePipe } from './homepage.pipe';
 
 export const appRoutes: Routes = [
@@ -50,12 +51,14 @@ export const appRoutes: Routes = [
 	{
 		path: 'contact',
 		component: ContactComponent,
-
 	},
 	{
 		path: 'recipes',
 		component: RecipesComponent,
-
+	},
+	{
+		path: 'addrecipe',
+		component: AddrecipeComponent,
 	},
 
 ];
@@ -75,7 +78,8 @@ export const appRoutes: Routes = [
 		RecipesComponent,
 		NavbarComponent,
 		InterativethumbnailComponent,
-		RecipepopupComponent
+		RecipepopupComponent,
+		AddrecipeComponent
   ],
   imports: [
 		BrowserModule,

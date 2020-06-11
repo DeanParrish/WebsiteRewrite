@@ -136,5 +136,22 @@ router.get('/recipes', (req, res) => {
     });
 });
 
+router.post('/insertrecipe', (req, res) => {
+    connection((db) => {
+        var data = new Recipe(req.body);
+        console.log("inside api req.body: " + data)
+        data.save()
+        .then(item => {
+            console.log("item saved to database");
+            response.data = item;
+            res.json(response)
+            })
+            .catch(err => {
+                console.log("not saved")
+                sendError(err, res);
+            });
+    });
+});
+
 
 module.exports = router;

@@ -15,4 +15,12 @@ export class RecipeDataService {
     return this._http.get("/api/recipes")
       .pipe(map((result: any) => this.result = result));
   }
+
+  insertRecipe(values){
+    return this._http.post("/api/insertrecipe", values)
+        .pipe(map((response: Response) => {
+          console.log(response)
+          return response;
+      }))
+  }
 }
