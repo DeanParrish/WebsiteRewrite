@@ -20,6 +20,7 @@ import { NavbarComponent } from './elements/navbar/navbar.component';
 import { InterativethumbnailComponent } from './components/interativethumbnail/interativethumbnail.component';
 import { RecipepopupComponent } from './components/recipes/recipepopup/recipepopup.component';
 import { AddrecipeComponent } from './components/recipes/addrecipe/addrecipe.component';
+import { EditrecipepopupComponent } from './components/recipes/editrecipepopup/editrecipepopup.component';
 //import { HomepagePipe } from './homepage.pipe';
 
 export const appRoutes: Routes = [
@@ -79,7 +80,8 @@ export const appRoutes: Routes = [
 		NavbarComponent,
 		InterativethumbnailComponent,
 		RecipepopupComponent,
-		AddrecipeComponent
+		AddrecipeComponent,
+		EditrecipepopupComponent
   ],
   imports: [
 		BrowserModule,
@@ -92,7 +94,8 @@ export const appRoutes: Routes = [
 		CustomerInfoComponent,
 		CustomerInfoAddComponent,
 		CustomerInfoDetailsComponent,
-		RecipepopupComponent
+		RecipepopupComponent,
+		EditrecipepopupComponent
 	],
   providers: [
 		CustomerDataService,

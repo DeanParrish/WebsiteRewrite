@@ -120,7 +120,7 @@ var recipeSchema = new mongoose.Schema({
 
 var Recipe = mongoose.model("recipes", recipeSchema);
 
-// Get users
+// Get recipes
 router.get('/recipes', (req, res) => {
     connection((db) => {
         db.collection('recipes')
@@ -151,6 +151,23 @@ router.post('/insertrecipe', (req, res) => {
                 sendError(err, res);
             });
     });
+});
+
+router.put("/updaterecipe/:id", (req, res) => {
+    connection((db) => {
+        Recipe.updateOne({_id: req.params.id}, req.body,{upsert: true})
+            .then(item => {
+                response.data = item;
+                res.json(response);
+            })
+            .catch(err => {
+                console.log("not saved")
+                sendError(err, res);
+            });
+        res.data = "in update";
+    });
+         
+    
 });
 
 

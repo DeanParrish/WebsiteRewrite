@@ -23,4 +23,12 @@ export class RecipeDataService {
           return response;
       }))
   }
+
+  updateRecipe(id, values){
+    return this._http.put("/api/updaterecipe/" + id, values)
+      .pipe(map((response: Response) => {
+        console.log(response)
+        return response;
+    })) 
+  }
 }

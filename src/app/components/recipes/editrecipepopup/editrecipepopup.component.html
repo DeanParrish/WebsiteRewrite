@@ -1,13 +1,13 @@
 <form [formGroup]="recipeForm" class="form" (ngSubmit)="onSubmit(recipeForm.value)">
   <div class="form-group">
       <mat-form-field>
-        <input required matInput formControlName="name" placeholder="Name"/>
+        <input required matInput formControlName="name" placeholder="Name" />
       </mat-form-field>
   </div>
 
   <div class="form-group">
       <mat-form-field>
-        <input required matInput formControlName="category" placeholder="Category"/>
+        <input required matInput formControlName="category" placeholder="Category" [value]="this.data.category"/>
       </mat-form-field>
   </div>
   
@@ -29,12 +29,12 @@
 
   <div class="form-group">
       <mat-form-field>
-        <input matInput formControlName="link" placeholder="Link"/>
+        <input matInput formControlName="link" placeholder="Link" [value]="this.data.link"/>
       </mat-form-field>
   </div>
 
 <div class="alert-modal-buttons">
-  <button routerLink="/recipes" mat-raised-button color="primary" class="alert-modal-button alert-modal-button-success" type="submit">Add</button>
-  <button routerLink="/recipes" mat-raised-button class="alert-modal-button alert-modal-button-failure" type="button">Cancel</button>
+  <button mat-raised-button color="primary" class="alert-modal-button alert-modal-button-success" type="submit">Update</button>
+  <button mat-raised-button class="alert-modal-button alert-modal-button-failure" type="button"(click)="onCloseCancel()">Cancel</button>
 </div>
 </form>

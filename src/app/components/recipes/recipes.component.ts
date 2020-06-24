@@ -4,6 +4,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {RecipepopupComponent} from './recipepopup/recipepopup.component';
 import { RecipeDataService } from '../../services/recipe-data.service';
 import {Recipe} from '../../interfaces/recipe';
+import { EditrecipepopupComponent } from './editrecipepopup/editrecipepopup.component';
 
 @Component({
   selector: 'app-recipes',
@@ -12,7 +13,7 @@ import {Recipe} from '../../interfaces/recipe';
 })
 export class RecipesComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'category'];
+  displayedColumns: string[] = ['name', 'category', 'actions'];
   recipeSource = new MatTableDataSource();
   recipeDisplayData = new MatTableDataSource();
   categories: string[] = [];
@@ -41,6 +42,12 @@ export class RecipesComponent implements OnInit {
 
   openDetails(recipe){
     this.dialog.open(RecipepopupComponent, {
+      data: recipe
+    });
+  }
+
+  editRecipe(recipe){
+    this.dialog.open(EditrecipepopupComponent, {
       data: recipe
     });
   }

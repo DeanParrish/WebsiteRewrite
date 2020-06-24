@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+
 import {RecipeDataService} from '../../../services/recipe-data.service';
 
 @Component({
-  selector: 'app-addrecipe',
-  templateUrl: './addrecipe.component.html',
-  styleUrls: ['./addrecipe.component.css']
+  selector: 'app-editrecipepopup',
+  templateUrl: './editrecipepopup.component.html',
+  styleUrls: ['./editrecipepopup.component.css']
 })
-export class AddrecipeComponent implements OnInit {
+export class EditrecipepopupComponent implements OnInit {
 
   name: string;
   category: string;
@@ -20,9 +22,20 @@ export class AddrecipeComponent implements OnInit {
     stepNumber: 0,
     stepInfo: ''
   }];
-  constructor(private recipeService: RecipeDataService) { }
+
+  constructor(private recipeService: RecipeDataService, 
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public thisDialogRef: MatDialogRef<EditrecipepopupComponent>) { }
 
   ngOnInit() {
+    console.log(this.data)
+    if(this.data){
+      this.ingredients = this.data.ingredients;
+      this.category = this.data.category;
+      this.steps = this.data.steps;
+      this.name = this.data.name;
+    }
+
     this.recipeForm = new FormGroup({
       name: new FormControl(this.name, [
         Validators.required
@@ -32,6 +45,7 @@ export class AddrecipeComponent implements OnInit {
       ]),
       link: new FormControl(),
     });
+    
   }
 
   addIngredient(){
@@ -55,11 +69,18 @@ export class AddrecipeComponent implements OnInit {
       data.ingredients = this.ingredients;
       data.steps = this.steps;
       data.link = values.link;
-  
-      this.recipeService.insertRecipe(data)
-      .subscribe(res => {
+
+      this.recipeService.updateRecipe(this.data._id, data)
+      .subscribe(res=> {
+        console.log(res);
+        console.log("dialog" + this.thisDialogRef);
+        this.thisDialogRef.close(res);
         this.recipeForm.reset();
-      })
+        location.reload();
+        return res;
+        
+    });
     }
   }
+
 }
