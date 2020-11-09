@@ -72,8 +72,6 @@ export class EditrecipepopupComponent implements OnInit {
 
       this.recipeService.updateRecipe(this.data._id, data)
       .subscribe(res=> {
-        console.log(res);
-        console.log("dialog" + this.thisDialogRef);
         this.thisDialogRef.close(res);
         this.recipeForm.reset();
         location.reload();
@@ -81,6 +79,11 @@ export class EditrecipepopupComponent implements OnInit {
         
     });
     }
+  }
+
+  onCloseCancel(){
+    this.thisDialogRef.close();
+    this.recipeForm.reset();
   }
 
 }
