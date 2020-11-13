@@ -54,7 +54,7 @@ export const appRoutes: Routes = [
 	{
 	    path: 'customerinfo',
 		component: CustomerInfoComponent,
-		canActivate: [AuthGuard]
+		//canActivate: [AuthGuard]
 	},
 	{
 		path: 'contact',
