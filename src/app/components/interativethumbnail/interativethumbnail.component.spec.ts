@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { InterativethumbnailComponent } from './interativethumbnail.component';
 
@@ -6,7 +6,7 @@ describe('InterativethumbnailComponent', () => {
   let component: InterativethumbnailComponent;
   let fixture: ComponentFixture<InterativethumbnailComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ InterativethumbnailComponent ]
     })

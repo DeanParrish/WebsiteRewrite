@@ -3,11 +3,15 @@ import { CustomerInfoComponent } from './customer-info/customer-info.component';
 import { RecipesComponent } from './components/recipes/recipes.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { TestComponentComponent } from './test-component/test-component.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+
+
 
 export const routes: Routes = [
 	{
 	    path: '',
-	    component: CustomerInfoComponent,
+		component: CustomerInfoComponent,	
 		//   resolve: {
 		//     data: CategoriesResolver
 		// 	}
@@ -30,4 +34,12 @@ export const routes: Routes = [
 	    path: 'recipes',
 	    component: RecipesComponent,
 	},
+	{
+		path: 'login',
+		component: LoginComponent
+		},
+		{
+		path: 'register',
+		component: RegisterComponent
+		}
 ];

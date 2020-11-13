@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpModule } from '@angular/http';
+//import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -36,7 +36,7 @@ import {
   ],
   imports: [
     CommonModule,
-    HttpModule,
+    //HttpModule,
     ReactiveFormsModule,
     FormsModule,
     RouterModule,
@@ -66,7 +66,7 @@ import {
   exports: [
     // BreadcrumbComponent,
     CommonModule,
-    HttpModule,
+    //HttpModule,
     ReactiveFormsModule,
     FormsModule,
     RouterModule,

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { AddrecipeComponent } from './addrecipe.component';
+import { AuthguardComponent } from './authguard.component';
 
-describe('AddrecipeComponent', () => {
-  let component: AddrecipeComponent;
-  let fixture: ComponentFixture<AddrecipeComponent>;
+describe('AuthguardComponent', () => {
+  let component: AuthguardComponent;
+  let fixture: ComponentFixture<AuthguardComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddrecipeComponent ]
+      declarations: [ AuthguardComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddrecipeComponent);
+    fixture = TestBed.createComponent(AuthguardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

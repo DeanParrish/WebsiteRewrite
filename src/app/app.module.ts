@@ -21,6 +21,12 @@ import { InterativethumbnailComponent } from './components/interativethumbnail/i
 import { RecipepopupComponent } from './components/recipes/recipepopup/recipepopup.component';
 import { AddrecipeComponent } from './components/recipes/addrecipe/addrecipe.component';
 import { EditrecipepopupComponent } from './components/recipes/editrecipepopup/editrecipepopup.component';
+import { AuthGuard } from './authguard/authguard.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { UserService } from './services/user-service.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
 //import { HomepagePipe } from './homepage.pipe';
 
 export const appRoutes: Routes = [
@@ -47,7 +53,8 @@ export const appRoutes: Routes = [
 	},
 	{
 	    path: 'customerinfo',
-	    component: CustomerInfoComponent,
+		component: CustomerInfoComponent,
+		canActivate: [AuthGuard]
 	},
 	{
 		path: 'contact',
@@ -60,6 +67,14 @@ export const appRoutes: Routes = [
 	{
 		path: 'addrecipe',
 		component: AddrecipeComponent,
+	},
+	{
+		path: 'login',
+		component: LoginComponent,
+	},
+	{
+		path: 'register',
+		component: RegisterComponent,
 	},
 
 ];
@@ -81,14 +96,18 @@ export const appRoutes: Routes = [
 		InterativethumbnailComponent,
 		RecipepopupComponent,
 		AddrecipeComponent,
-		EditrecipepopupComponent
+		EditrecipepopupComponent,
+		//AuthGuard,
+		LoginComponent,
+		RegisterComponent
   ],
   imports: [
 		BrowserModule,
 		SharedModule,
     RouterModule.forRoot(appRoutes,
-      { useHash: false }
-    )
+      { useHash: false, relativeLinkResolution: 'legacy' }
+	),
+
 	],
 	entryComponents: [
 		CustomerInfoComponent,
@@ -99,7 +118,8 @@ export const appRoutes: Routes = [
 	],
   providers: [
 		CustomerDataService,
-		NavbarComponent
+		NavbarComponent,
+		UserService,
 	],
   bootstrap: [AppComponent]
 })
