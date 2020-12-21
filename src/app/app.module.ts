@@ -26,6 +26,11 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserService } from './services/user-service.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoginButtonComponent } from './components/login-button/login-button.component';
+import { LogoutButtonComponent } from './components/logout-button/logout-button.component';
+
+import { AuthModule, AuthService } from '@auth0/auth0-angular';
+import { environment as env } from '../environments/environment';
 
 //import { HomepagePipe } from './homepage.pipe';
 
@@ -54,7 +59,7 @@ export const appRoutes: Routes = [
 	{
 	    path: 'customerinfo',
 		component: CustomerInfoComponent,
-		//canActivate: [AuthGuard]
+		canActivate: [AuthGuard]
 	},
 	{
 		path: 'contact',
@@ -99,7 +104,9 @@ export const appRoutes: Routes = [
 		EditrecipepopupComponent,
 		//AuthGuard,
 		LoginComponent,
-		RegisterComponent
+		RegisterComponent,
+		LoginButtonComponent,
+		LogoutButtonComponent
   ],
   imports: [
 		BrowserModule,
@@ -107,6 +114,9 @@ export const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes,
       { useHash: false, relativeLinkResolution: 'legacy' }
 	),
+	AuthModule.forRoot({
+		...env
+	})
 
 	],
 	entryComponents: [
@@ -120,6 +130,8 @@ export const appRoutes: Routes = [
 		CustomerDataService,
 		NavbarComponent,
 		UserService,
+		//AuthService.,
+		
 	],
   bootstrap: [AppComponent]
 })
