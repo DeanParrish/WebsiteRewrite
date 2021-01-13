@@ -1,0 +1,21 @@
+$small: 1000px;
+
+.login{
+    background-color: lightblue;
+    border-radius: 10%;
+    @media screen and (max-width: $small) {
+         background-color: transparent;
+        border-radius: 0%;
+        color: lightblue;
+    }
+}
+
+.logout{
+    background-color: tomato;
+    border-radius: 10%;
+    @media screen and (max-width: $small) {
+        background-color: transparent;
+        border-radius: 0%;
+        color: tomato;
+    }
+}

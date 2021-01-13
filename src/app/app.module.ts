@@ -21,7 +21,7 @@ import { InterativethumbnailComponent } from './components/interativethumbnail/i
 import { RecipepopupComponent } from './components/recipes/recipepopup/recipepopup.component';
 import { AddrecipeComponent } from './components/recipes/addrecipe/addrecipe.component';
 import { EditrecipepopupComponent } from './components/recipes/editrecipepopup/editrecipepopup.component';
-import { AuthGuard } from './authguard/authguard.component';
+//import { AuthGuard } from './authguard/authguard.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserService } from './services/user-service.service';
@@ -29,8 +29,10 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginButtonComponent } from './components/login-button/login-button.component';
 import { LogoutButtonComponent } from './components/logout-button/logout-button.component';
 
-import { AuthModule, AuthService } from '@auth0/auth0-angular';
+import { AuthModule, AuthService, AuthGuard } from '@auth0/auth0-angular';
 import { environment as env } from '../environments/environment';
+import { LoginlinkComponent } from './elements/loginlink/loginlink.component';
+import { LogoutlinkComponent } from './elements/logoutlink/logoutlink.component';
 
 //import { HomepagePipe } from './homepage.pipe';
 
@@ -70,8 +72,9 @@ export const appRoutes: Routes = [
 		component: RecipesComponent,
 	},
 	{
-		path: 'addrecipe',
+		path: 'recipes/addrecipe',
 		component: AddrecipeComponent,
+		canActivate: [AuthGuard]
 	},
 	{
 		path: 'login',
@@ -106,7 +109,9 @@ export const appRoutes: Routes = [
 		LoginComponent,
 		RegisterComponent,
 		LoginButtonComponent,
-		LogoutButtonComponent
+		LogoutButtonComponent,
+		LoginlinkComponent,
+		LogoutlinkComponent
   ],
   imports: [
 		BrowserModule,
@@ -130,7 +135,7 @@ export const appRoutes: Routes = [
 		CustomerDataService,
 		NavbarComponent,
 		UserService,
-		//AuthService.,
+		AuthService,
 		
 	],
   bootstrap: [AppComponent]

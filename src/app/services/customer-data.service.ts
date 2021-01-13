@@ -1,18 +1,31 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { map } from 'rxjs/operators';
+
+import { AuthService } from '@auth0/auth0-angular/';
+import { Observable } from 'rxjs';
+import { CssSelector } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerDataService {
+  private headers = new HttpHeaders();
+
+  public isIntialized = false;
 
   result: any;
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient, private auth: AuthService) { 
+    this.auth.idTokenClaims$.subscribe(res => {
+      this.headers = this.headers.set('Authorization', 'Bearer ' + res.__raw);
+      this.isIntialized = true;
+
+    })
+  }
 
   getCustomer(){
-    return this._http.get("/api/users")
+    return this._http.get("/api/users",{ headers: this.headers })
       .pipe(map((result: any) => this.result = result));
   }
 
@@ -33,7 +46,7 @@ export class CustomerDataService {
     // let formData: FormData = new FormData(); 
     // formData.append('firstName', values.firstName); 
     // formData.append('comments', values.comments); 
-    return this._http.post("/api/insertuser", values)
+    return this._http.post("/api/insertuser", values, {headers: this.headers})
         .pipe(map((response: Response) => {
           console.log(response)
           return response;
@@ -65,7 +78,7 @@ updateCustomer(id, values){
     var url = "/api/updatecustomer/" + id;
     console.log(url);
 
-    return this._http.put(url, values)
+    return this._http.put(url, values, {headers: this.headers})
       .pipe(map((response: Response) => {
         console.log(response)
         return response;
@@ -88,7 +101,7 @@ deleteCustomer(id){
 
   var url = "/api/deletecustomer/" + id;
 
-  return this._http.post(url, id)
+  return this._http.post(url, id, {headers: this.headers})
         .pipe(map((response: Response) => {
           console.log(response)
           return response;

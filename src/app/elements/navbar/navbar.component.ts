@@ -1,16 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
-
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css'],
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
 
   activeNode: string;
-  constructor() {
-    let test: string = "asdf";
+  constructor(public auth: AuthService) {
+    
    }
 
   ngOnInit() {

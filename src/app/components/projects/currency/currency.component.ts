@@ -17,7 +17,7 @@ export class CurrencyComponent implements OnInit  {
   private _currencyParams = "?access_key=7dc5f63c9c54c7d04bdfb33691a41f23";
   source: any;
   currencyList: any;
-  @ViewChild('testChart', null) private chartRef; 
+  @ViewChild('testChart', {static: false}) private chartRef; 
   currencyObjectList = [];
   historicalRateArray = [];
   historicalDateArray = [];

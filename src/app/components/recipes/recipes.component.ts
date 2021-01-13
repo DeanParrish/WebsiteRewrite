@@ -6,10 +6,12 @@ import { RecipeDataService } from '../../services/recipe-data.service';
 import {Recipe} from '../../interfaces/recipe';
 import { EditrecipepopupComponent } from './editrecipepopup/editrecipepopup.component';
 
+import { AuthService } from '@auth0/auth0-angular/';
+
 @Component({
   selector: 'app-recipes',
   templateUrl: './recipes.component.html',
-  styleUrls: ['./recipes.component.css']
+  styleUrls: ['./recipes.component.scss']
 })
 export class RecipesComponent implements OnInit {
 
@@ -18,21 +20,22 @@ export class RecipesComponent implements OnInit {
   recipeDisplayData = new MatTableDataSource();
   categories: string[] = [];
   categorySelected: string;
+  userID: string;
 
-  constructor(public recipeService: RecipeDataService, public dialog: MatDialog) { }
+  constructor(public recipeService: RecipeDataService, public dialog: MatDialog, private auth: AuthService) { 
+    this.auth.idTokenClaims$.subscribe(res => {
+      if(res != null)
+        this.userID = res.sub;
+    })
+  }
 
   ngOnInit() {
-    console.log("oninit")
     this.recipeService.getAllRecipes()
       .subscribe(res => {
-        console.log(res);
         for(var i in res.data){
           if(this.categories === undefined || this.categories.find(x=>x === res.data[i].category) === undefined)
             this.categories.push(res.data[i].category)
         }
-
-        // var string = "hello, how, are";
-        // var arr = ["hello", "how", "are"]
         this.recipeSource = new MatTableDataSource(res.data);
         this.recipeDisplayData = new MatTableDataSource(res.data);
       })

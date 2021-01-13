@@ -7,7 +7,7 @@ import {RecipeDataService} from '../../../services/recipe-data.service';
 @Component({
   selector: 'app-editrecipepopup',
   templateUrl: './editrecipepopup.component.html',
-  styleUrls: ['./editrecipepopup.component.css']
+  styleUrls: ['./editrecipepopup.component.scss']
 })
 export class EditrecipepopupComponent implements OnInit {
 
@@ -28,7 +28,6 @@ export class EditrecipepopupComponent implements OnInit {
               public thisDialogRef: MatDialogRef<EditrecipepopupComponent>) { }
 
   ngOnInit() {
-    console.log(this.data)
     if(this.data){
       this.ingredients = this.data.ingredients;
       this.category = this.data.category;
@@ -63,6 +62,19 @@ export class EditrecipepopupComponent implements OnInit {
   onSubmit(values){
     console.log(this.recipeForm.valid)
     if(this.recipeForm.valid){
+      //clean up any empty ingredients/steps
+      for(var i in this.ingredients){
+        if(this.ingredients[i].ingredientName === ""){
+          this.ingredients.splice(i, 1);
+        }
+      }
+
+      for(var i in this.steps){
+        if(this.steps[i].stepInfo === ""){
+          this.steps = this.steps.splice(i, 1);
+        }
+      }
+
       let data: any = {};
       data.name = values.name;
       data.category = values.category;

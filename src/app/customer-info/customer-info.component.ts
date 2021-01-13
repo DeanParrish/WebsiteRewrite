@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource, MatSort } from '@angular/material';
 import { CustomerDataService } from '../services/customer-data.service';
 import { Title  } from "@angular/platform-browser";
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 
 import { CustomerInfoAddComponent } from '../customer-info/customer-info-add/customer-info-add-modal.component';
 import { CustomerInfoDetailsComponent } from '../customer-info/customer-info-details/customer-info-details-modal.component';
@@ -13,9 +14,8 @@ import { CustomerInfoDetailsComponent } from '../customer-info/customer-info-det
   styleUrls: ['./customer-info.component.css']
 })
 export class CustomerInfoComponent implements OnInit {
-  //data: CustomerInfo[];
   displayedColumns: string[] = ['firstName', 'lastName', 'phoneNumber1'];
-  //peopleSource: any;
+  isAuthorized = false;
   peopleSource = new MatTableDataSource();
   allData = new MatTableDataSource();
 
@@ -24,21 +24,29 @@ export class CustomerInfoComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     public customerService: CustomerDataService,
-    private titleService: Title
+    private titleService: Title,
+    private _http: HttpClient
   ) {
     this.titleService.setTitle("Dean Parrish - Customer Info")
    }
 
   ngOnInit() {
+    console.log(this.customerService.isIntialized);
     this.customerService.getCustomer()
     .subscribe(res=> {
       console.log(res);
       if(res.status == 200){
+        this.isAuthorized = true;
         this.peopleSource = new MatTableDataSource(res.data)
         this.allData = new MatTableDataSource(res.data)
         console.log(this.allData);
-      }
+      } 
       //console.log("customerinfo: " + JSON.stringify(res))
+    }, err => {
+      console.log(err);
+      if(err.status == 401){
+        console.log(err.status)       
+      }
     });
     
   }
@@ -49,16 +57,6 @@ export class CustomerInfoComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(res => {
       console.log("close new");
-        // this.customerService.getCustomer()
-        //   .subscribe(res => {
-        //     console.log(res);
-        //     if(res.status == 200){
-        //       this.peopleSource = new MatTableDataSource(res.data)
-        //       this.allData = new MatTableDataSource(res.data)
-        //     }
-            
-        //     //console.log(this.peopleSource)
-        //   })
       if(res){
         console.log("close new");
         this.customerService.getCustomer()
@@ -83,14 +81,6 @@ export class CustomerInfoComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(res => {
       console.log("after edit before: " + JSON.stringify(res))
-      // this.customerService.getCustomer()
-      //     .subscribe(res => {
-      //       if(res.status == 200){
-      //         this.peopleSource = new MatTableDataSource(res.data)
-      //         this.allData = new MatTableDataSource(res.data)
-      //       }
-            
-      //     })
       if(res){
         console.log("after edit")
         this.customerService.getCustomer()

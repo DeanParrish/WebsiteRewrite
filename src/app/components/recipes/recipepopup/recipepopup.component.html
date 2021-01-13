@@ -1,16 +1,19 @@
-<h1 mat-dialog-title>{{this.data.name}}</h1>
-<div mat-dialog-content>
-  <i>{{this.data.category}}</i><br/><br/>
+<mat-dialog-content>
+  <h1 mat-dialog-title>{{this.data.name}}</h1>
+  <div mat-dialog-content>
+    <i>{{this.data.category}}</i><br/><br/>
 
-  <b>Ingredients:</b>
-  <ul>
-    <li *ngFor="let ingredient of this.data.ingredients">{{ingredient.ingredientName}}</li>
-  </ul>
+    <b>Ingredients:</b>
+    <ul>
+      <li *ngFor="let ingredient of this.data.ingredients">{{ingredient.ingredientName}}</li>
+    </ul>
 
-  <b>Steps:</b>
-  <ul>
-    <li *ngFor="let step of this.data.steps">{{step.stepInfo}}</li>
-  </ul>
+    <b>Steps:</b>
+    <ul>
+      <li *ngFor="let step of this.data.steps">{{step.stepInfo}}</li>
+    </ul>
 
-  Link Source: {{this.data.link}}
-</div>
+    Link Source: {{this.data.link}}
+  </div>
+</mat-dialog-content>
+

@@ -1,0 +1,15 @@
+$small: 900px;
+
+.app-recipes{
+    padding: 5%;
+    overflow: hidden;
+}
+
+table{
+    width: 50%;
+    @media screen and (max-width: $small) {
+        width:  100%;
+    }
+
+    overflow: hidden;
+}

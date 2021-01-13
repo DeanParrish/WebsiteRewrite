@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {RecipeDataService} from '../../../services/recipe-data.service';
+
+import { AuthService } from '@auth0/auth0-angular/'
 
 @Component({
   selector: 'app-addrecipe',
   templateUrl: './addrecipe.component.html',
-  styleUrls: ['./addrecipe.component.css']
+  styleUrls: ['./addrecipe.component.scss']
 })
 export class AddrecipeComponent implements OnInit {
 
@@ -20,7 +23,13 @@ export class AddrecipeComponent implements OnInit {
     stepNumber: 0,
     stepInfo: ''
   }];
-  constructor(private recipeService: RecipeDataService) { }
+  userID: string;
+
+  constructor(private recipeService: RecipeDataService, private auth: AuthService, private router: Router) { 
+    this.auth.idTokenClaims$.subscribe(res => {
+      this.userID = res.sub;
+    })
+  }
 
   ngOnInit() {
     this.recipeForm = new FormGroup({
@@ -55,10 +64,12 @@ export class AddrecipeComponent implements OnInit {
       data.ingredients = this.ingredients;
       data.steps = this.steps;
       data.link = values.link;
+      data.userID = this.userID;
   
       this.recipeService.insertRecipe(data)
       .subscribe(res => {
         this.recipeForm.reset();
+        this.router.navigateByUrl("/recipes");
       })
     }
   }

@@ -1,4 +1,5 @@
 {
     "domain": "dev-4zf9twtm.us.auth0.com",
-    "clientId": "V6A3GkWiQ22fSPH4vRWxMn8Z4wHBOMbW"
+    "clientId": "V6A3GkWiQ22fSPH4vRWxMn8Z4wHBOMbW",
+    "audience": "https://deanparrish.net"
   }

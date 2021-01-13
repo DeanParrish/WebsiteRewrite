@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
+const jwt = require('express-jwt');
+const jwtAuthz = require('express-jwt-authz');
+const jwksRsa = require('jwks-rsa');
+const req = require('request');
 
 // Connect
 const connection = (closure) => {
@@ -10,6 +14,27 @@ const connection = (closure) => {
     closure(client.db());
     });
 };
+
+console.log(req);
+
+const checkJwt = jwt({
+    // Dynamically provide a signing key
+    // based on the kid in the header and 
+    // the signing keys provided by the JWKS endpoint.
+    secret: jwksRsa.expressJwtSecret({
+      cache: true,
+      rateLimit: true,
+      jwksRequestsPerMinute: 5,
+      jwksUri: `https://dev-4zf9twtm.us.auth0.com/.well-known/jwks.json`
+    }),
+  
+    // Validate the audience and the issuer.
+    //audience: 'https://deanparrish.net/',
+    //issuer: `https://deanparrish.net/`,
+    audience: 'V6A3GkWiQ22fSPH4vRWxMn8Z4wHBOMbW',
+    issuer: 'https://dev-4zf9twtm.us.auth0.com/',
+    algorithms: ['RS256']
+  });
 
 // Error handling
 const sendError = (err, res) => {
@@ -24,7 +49,6 @@ let response = {
     data: [],
     message: null
 };
-
 
 var mongoose = require("mongoose");
 mongoose.Promise = global.Promise;mongoose.connect("mongodb://localhost:27017/test", {useNewUrlParser: true});
@@ -45,7 +69,7 @@ var userSchema = new mongoose.Schema({
 var User = mongoose.model("customerInfo", userSchema);
 
 // Get users
-router.get('/users', (req, res) => {
+router.get('/users', checkJwt, (req, res) => {
     connection((db) => {
         User.find({}).sort("firstName")
             .then(users => {
@@ -56,7 +80,7 @@ router.get('/users', (req, res) => {
     });
 });
 
-router.post('/insertuser', (req, res) => {
+router.post('/insertuser', checkJwt, (req, res) => {
     connection((db) => {
         var data = new User(req.body);
         console.log("inside api req.body: " + data)
@@ -73,7 +97,7 @@ router.post('/insertuser', (req, res) => {
     });
 });
 
-router.put("/updatecustomer/:id", (req, res) => {
+router.put("/updatecustomer/:id", checkJwt, (req, res) => {
     connection((db) => {
         User.updateOne({_id: req.params.id}, req.body,{upsert: true})
             .then(item => {
@@ -90,7 +114,7 @@ router.put("/updatecustomer/:id", (req, res) => {
     
 });
 
-router.post("/deletecustomer/:id", (req, res) => {
+router.post("/deletecustomer/:id", checkJwt, (req, res) => {
     connection((db) => {
         console.log(req.body);
         User.deleteOne({_id: req.params.id})
@@ -115,7 +139,8 @@ var recipeSchema = new mongoose.Schema({
     category: String,
     ingredients: Array,
     steps: Array,
-    link: String
+    link: String,
+    userID: String
 });
 
 var Recipe = mongoose.model("recipes", recipeSchema);
@@ -136,7 +161,7 @@ router.get('/recipes', (req, res) => {
     });
 });
 
-router.post('/insertrecipe', (req, res) => {
+router.post('/insertrecipe', checkJwt, (req, res) => {
     connection((db) => {
         var data = new Recipe(req.body);
         console.log("inside api req.body: " + data)
@@ -153,7 +178,7 @@ router.post('/insertrecipe', (req, res) => {
     });
 });
 
-router.put("/updaterecipe/:id", (req, res) => {
+router.put("/updaterecipe/:id", checkJwt, (req, res) => {
     connection((db) => {
         Recipe.updateOne({_id: req.params.id}, req.body,{upsert: true})
             .then(item => {
@@ -169,6 +194,19 @@ router.put("/updaterecipe/:id", (req, res) => {
          
     
 });
+
+//begin users
+
+var userSchema = new mongoose.Schema({
+    firstName: String,
+    lastName: String,
+    email: String,
+    steps: Array,
+    link: String,
+    user: String
+});
+
+var Recipe = mongoose.model("recipes", recipeSchema);
 
 
 module.exports = router;

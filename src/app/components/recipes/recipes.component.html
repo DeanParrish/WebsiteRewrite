@@ -1,7 +1,3 @@
-<!-- <p>
-  recipes works!
-</p> -->
-
 <div class="app-recipes">
   <mat-form-field>
     <mat-label>Category</mat-label>
@@ -16,7 +12,7 @@
     <input matInput type="text" (keyup)="filterData($event.target.value)" placeholder="Filter">
   </mat-form-field>
   <br/><br/>
-  <a routerLink="/addrecipe">Add Recipe</a>
+  <a routerLink="addrecipe">Add Recipe</a>
   <br/><br/>
   <table mat-table [dataSource]="recipeDisplayData.filteredData" class="mat-elevation-z8">
     <ng-container matColumnDef="name">
@@ -29,7 +25,7 @@
     </ng-container>
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> </th>
-      <td mat-cell *matCellDef="let recipe"><a [routerLink]="" (click)="openDetails(recipe)">View</a> | <a [routerLink]="" (click)="editRecipe(recipe)">Edit</a> </td>
+      <td mat-cell *matCellDef="let recipe"><a [routerLink]="" (click)="openDetails(recipe)">View</a> <span *ngIf="recipe.userID === this.userID && this.userID != null"> | <a  [routerLink]="" (click)="editRecipe(recipe)">Edit</a></span> </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row  *matRowDef="let recipe; columns: displayedColumns;"></tr>
