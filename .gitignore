@@ -39,3 +39,4 @@ testem.log
 Thumbs.db
 
 auth_config.json
+src\auth_config.json
