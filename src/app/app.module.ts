@@ -34,6 +34,13 @@ import { environment as env } from '../environments/environment';
 import { LoginlinkComponent } from './elements/loginlink/loginlink.component';
 import { LogoutlinkComponent } from './elements/logoutlink/logoutlink.component';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { RegisterfirebaseComponent } from './components/registerfirebase/registerfirebase.component';
+import { LoginfirebaseComponent } from './components/loginfirebase/loginfirebase.component';
+//import { environment } from '../environments/environment';
+
 //import { HomepagePipe } from './homepage.pipe';
 
 export const appRoutes: Routes = [
@@ -111,9 +118,13 @@ export const appRoutes: Routes = [
 		LoginButtonComponent,
 		LogoutButtonComponent,
 		LoginlinkComponent,
-		LogoutlinkComponent
+		LogoutlinkComponent,
+		RegisterfirebaseComponent,
+		LoginfirebaseComponent
   ],
   imports: [
+		AngularFireModule.initializeApp(env.firebase),
+		AngularFireAuthModule,
 		BrowserModule,
 		SharedModule,
     RouterModule.forRoot(appRoutes,

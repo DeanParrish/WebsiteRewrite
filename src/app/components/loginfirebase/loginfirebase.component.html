@@ -1,0 +1,31 @@
+<form [formGroup]="registerForm" *ngIf="loginEmailClicked == true">
+    <div class="form-group">
+      <label>Email address</label>
+      <input type="email" formControlName="email" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" class="form-control" formControlName="password" required>
+      <label class="error">{{errorMessage}}</label>
+      <label class="success">{{successMessage}}</label>
+    </div>
+    <button type="submit" (click)="tryRegister(registerForm.value)" class="btn btn-default">Register</button>
+ </form>
+
+ <div class='registerType'>
+    <button (click)="showEmailForm()" mat-button style="padding: 1rem;">
+      <mat-icon style="width: 50px; height:30px"
+                svgIcon="email"></mat-icon> Log In With Email
+  </button>
+  </div>
+ <div class='registerType'>
+    <button (click)="loginWithGoogle()"mat-button style="padding: 1rem;">
+        <mat-icon style="width: 50px; height:30px"
+                  svgIcon="imgGoogle"></mat-icon> Log In With Google
+    </button>
+    </div>
+    <div class='registerType'>
+      <button mat-dialog-close mat-button style="padding: 1rem;">
+        <mat-icon aria-hidden="false" aria-label="Example home icon"></mat-icon> Nevermind
+    </button>
+    </div>
