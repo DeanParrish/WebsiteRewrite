@@ -16,25 +16,45 @@ const connection = (closure) => {
 };
 
 console.log(req);
+var admin = require("firebase-admin");
 
-const checkJwt = jwt({
-    // Dynamically provide a signing key
-    // based on the kid in the header and 
-    // the signing keys provided by the JWKS endpoint.
-    secret: jwksRsa.expressJwtSecret({
-      cache: true,
-      rateLimit: true,
-      jwksRequestsPerMinute: 5,
-      jwksUri: `https://dev-4zf9twtm.us.auth0.com/.well-known/jwks.json`
-    }),
+var serviceAccount = require("./../../portfoliowebsite-28f8a-firebase-adminsdk-8e4dv-6513fab54f.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+
+// const checkJwt = jwt({
+//     // Dynamically provide a signing key
+//     // based on the kid in the header and 
+//     // the signing keys provided by the JWKS endpoint.
+//     secret: jwksRsa.expressJwtSecret({
+//       cache: true,
+//       rateLimit: true,
+//       jwksRequestsPerMinute: 5,
+//       jwksUri: `https://dev-4zf9twtm.us.auth0.com/.well-known/jwks.json`
+//     }),
   
-    // Validate the audience and the issuer.
-    //audience: 'https://deanparrish.net/',
-    //issuer: `https://deanparrish.net/`,
-    audience: 'V6A3GkWiQ22fSPH4vRWxMn8Z4wHBOMbW',
-    issuer: 'https://dev-4zf9twtm.us.auth0.com/',
-    algorithms: ['RS256']
+//     // Validate the audience and the issuer.
+//     //audience: 'https://deanparrish.net/',
+//     //issuer: `https://deanparrish.net/`,
+//     audience: 'portfoliowebsite-28f8a',
+//     issuer: 'https://securetoken.google.com/portfoliowebsite-28f8a',
+//     algorithms: ['RS256']
+//   });
+const checkJwt = function(idToken){
+    console.log(JSON.stringify(req));
+    admin
+  .auth()
+  .verifyIdToken(idToken)
+  .then((decodedToken) => {
+    const uid = decodedToken.uid;
+    // ...
+  })
+  .catch((error) => {
+    // Handle error
   });
+}
 
 // Error handling
 const sendError = (err, res) => {
@@ -51,7 +71,7 @@ let response = {
 };
 
 var mongoose = require("mongoose");
-mongoose.Promise = global.Promise;mongoose.connect("mongodb://localhost:27017/test", {useNewUrlParser: true});
+mongoose.Promise = global.Promise;mongoose.connect("mongodb://localhost:27017/test", {useNewUrlParser: true, useUnifiedTopology: true});
 
 var userSchema = new mongoose.Schema({
     firstName: String,
@@ -69,65 +89,85 @@ var userSchema = new mongoose.Schema({
 var User = mongoose.model("customerInfo", userSchema);
 
 // Get users
-router.get('/users', checkJwt, (req, res) => {
-    connection((db) => {
-        User.find({}).sort("firstName")
-            .then(users => {
-                response.data = users;
-                res.json(response);
-            })
-            .catch(err => sendError(err, res));
-    });
+router.get('/users', (req, res) => {
+    console.log(req.header("Authorization"));
+    admin.auth().verifyIdToken(req.header("Authorization")).then(result => {
+        connection((db) => {
+            User.find({}).sort("firstName")
+                .then(users => {
+                    response.data = users;
+                    res.json(response);
+                })
+                .catch(err => sendError(err, res));
+        });
+    }, err => {
+        if(err.code === "auth/argument-error"){
+            res.status(403);
+            res.json(response);
+        }else{
+            res.status(500);
+            response.data = err;
+            res.json(response);
+        }
+        
+        
+    })   
 });
 
-router.post('/insertuser', checkJwt, (req, res) => {
-    connection((db) => {
-        var data = new User(req.body);
-        console.log("inside api req.body: " + data)
-        data.save()
-        .then(item => {
-            console.log("item saved to database");
-            response.data = item;
-            res.json(response)
-            })
-            .catch(err => {
-                console.log("not saved")
-                sendError(err, res);
-            });
-    });
-});
-
-router.put("/updatecustomer/:id", checkJwt, (req, res) => {
-    connection((db) => {
-        User.updateOne({_id: req.params.id}, req.body,{upsert: true})
+router.post('/insertuser', (req, res) => {
+    admin.auth().verifyIdToken(req.header("Authorization")).then(result => {
+        connection((db) => {
+            var data = new User(req.body);
+            console.log("inside api req.body: " + data)
+            data.save()
             .then(item => {
+                console.log("item saved to database");
                 response.data = item;
-                res.json(response);
-            })
-            .catch(err => {
-                console.log("not saved")
-                sendError(err, res);
-            });
-        res.data = "in update";
-    });
-         
+                res.json(response)
+                })
+                .catch(err => {
+                    console.log("not saved")
+                    sendError(err, res);
+                });
+        });
+    }) 
     
 });
 
-router.post("/deletecustomer/:id", checkJwt, (req, res) => {
-    connection((db) => {
-        console.log(req.body);
-        User.deleteOne({_id: req.params.id})
-            .then(item => {
-                response.data = item;
-                res.json(response);
-            })
-            .catch(err => {
-                console.log("not deleted")
-                sendError(err, res);
-            });
-        res.data = "in delete";
-    });
+router.put("/updatecustomer/:id", (req, res) => {
+    admin.auth().verifyIdToken(req.header("Authorization")).then(result => {
+        connection((db) => {
+            User.updateOne({_id: req.params.id}, req.body,{upsert: true})
+                .then(item => {
+                    response.data = item;
+                    res.json(response);
+                })
+                .catch(err => {
+                    console.log("not saved")
+                    sendError(err, res);
+                });
+            res.data = "in update";
+        });
+    })     
+});
+
+router.post("/deletecustomer/:id", (req, res) => {
+    admin.auth().verifyIdToken(req.header("Authorization")).then(result => {
+        connection((db) => {
+            console.log(req.body);
+            User.deleteOne({_id: req.params.id})
+                .then(item => {
+                    response.data = item;
+                    res.json(response);
+                })
+                .catch(err => {
+                    console.log("not deleted")
+                    sendError(err, res);
+                });
+            res.data = "in delete";
+        });
+    }) 
+    
          
     
 });

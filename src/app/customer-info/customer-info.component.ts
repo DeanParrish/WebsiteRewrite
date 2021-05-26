@@ -7,6 +7,7 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 
 import { CustomerInfoAddComponent } from '../customer-info/customer-info-add/customer-info-add-modal.component';
 import { CustomerInfoDetailsComponent } from '../customer-info/customer-info-details/customer-info-details-modal.component';
+import { AuthService } from '../services/authservice.service';
 
 @Component({
   selector: 'app-customer-info',
@@ -25,30 +26,40 @@ export class CustomerInfoComponent implements OnInit {
     public dialog: MatDialog,
     public customerService: CustomerDataService,
     private titleService: Title,
-    private _http: HttpClient
+    private _http: HttpClient, 
+    private auth: AuthService
   ) {
     this.titleService.setTitle("Dean Parrish - Customer Info")
    }
 
   ngOnInit() {
-    console.log(this.customerService.isIntialized);
     this.customerService.getCustomer()
     .subscribe(res=> {
-      console.log(res);
       if(res.status == 200){
         this.isAuthorized = true;
         this.peopleSource = new MatTableDataSource(res.data)
         this.allData = new MatTableDataSource(res.data)
-        console.log(this.allData);
+      }else if(res.status == 403){
+        "Hello forbidden";
       } 
-      //console.log("customerinfo: " + JSON.stringify(res))
     }, err => {
-      console.log(err);
-      if(err.status == 401){
-        console.log(err.status)       
-      }
+      this.handleErrors(err);
     });
     
+  }
+
+  handleErrors(err){
+      if(err.status === 403){
+        this.auth.isUserAuthenicated().then(res => {
+          if(res.isUserLoggedIn == true){
+            this.auth.updateUserToken().then(res => {
+              if(res.updated == true){
+                this.ngOnInit();
+              }
+            })
+          }
+        })
+      } 
   }
 
   openNewPersonModal(){
@@ -56,33 +67,27 @@ export class CustomerInfoComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(res => {
-      console.log("close new");
       if(res){
-        console.log("close new");
         this.customerService.getCustomer()
           .subscribe(res => {
-            console.log(res);
             if(res.status == 200){
               this.peopleSource = new MatTableDataSource(res.data)
               this.allData = new MatTableDataSource(res.data)
-            }
-            
-            //console.log(this.peopleSource)
+            }            
+          }, err => {
+            this.handleErrors(err);
           })
       }
     })
   }
 
   openEditPersonModal(person){
-    console.log("param from base customerinfo: " + JSON.stringify(person));
     let dialogRef = this.dialog.open(CustomerInfoDetailsComponent, {
       data: { person: person }
     });
 
     dialogRef.afterClosed().subscribe(res => {
-      console.log("after edit before: " + JSON.stringify(res))
       if(res){
-        console.log("after edit")
         this.customerService.getCustomer()
           .subscribe(res => {
             if(res.status == 200){
@@ -90,19 +95,19 @@ export class CustomerInfoComponent implements OnInit {
               this.allData = new MatTableDataSource(res.data)
             }
             
+          }, err => {
+            this.handleErrors(err);
           })
       }
     })
   }
 
   deleteCustomer(person){
-    console.log("delete: " + JSON.stringify(person));
 
     let data: any = {};
 
     this.customerService.deleteCustomer(person._id)
     .subscribe(res=> {
-      console.log(res);
       this.customerService.getCustomer()
           .subscribe(res => {
             if(res.status == 200){
@@ -112,18 +117,15 @@ export class CustomerInfoComponent implements OnInit {
             
           })
     return res;
-      //console.log("customerinfo: " + JSON.stringify(res))
+    }, err => {
+      this.handleErrors(err);
     });
   }
 
 
   filterTable(filterValue: string) {
-    console.log(filterValue.trim().toLowerCase());
     this.allData.filter = filterValue.trim().toLowerCase();
-    console.log(this.peopleSource.filteredData);
     this.peopleSource.data = this.allData.filteredData;
-    //this.peopleSource = new MatTableDataSource(this.peopleSource.filteredData);
-    console.log("filter: " + this.peopleSource.filter);
   }
 
 }

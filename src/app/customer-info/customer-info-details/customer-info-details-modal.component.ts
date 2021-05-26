@@ -39,7 +39,6 @@ export class CustomerInfoDetailsComponent implements OnInit {
       comments: new FormControl()
       })
       
-      console.log(this.modalData)
       //set values
       this.personForm.controls["firstName"].setValue(this.modalData.person.firstName);
       this.personForm.controls["lastName"].setValue(this.modalData.person.lastName);
@@ -58,7 +57,6 @@ export class CustomerInfoDetailsComponent implements OnInit {
   }
 
   onSubmit(values){
-    console.log(this.person);
     let data: any = {};
     data.firstName = values.firstName;
     data.lastName = values.lastName;
@@ -74,29 +72,18 @@ export class CustomerInfoDetailsComponent implements OnInit {
     //update customer
     this.customerService.updateCustomer(this.person._id, data)
     .subscribe(res=> {
-      console.log(res);
-      console.log("dialog" + this.thisDialogRef);
       this.thisDialogRef.close(res);
     this.personForm.reset();
     return res;
-      //console.log("customerinfo: " + JSON.stringify(res))
     });
-
-    
-      // .then(question => {
-      //   this.thisDialogRef.close(question);
-      //   this.personForm.reset();
-      // });
   }
 
   deleteCustomer(person){
-    console.log("delete: " + JSON.stringify(person));
 
     let data: any = {};
 
     this.customerService.deleteCustomer(person._id)
     .subscribe(res=> {
-      console.log(res);
       this.customerService.getCustomer()
           .subscribe(res => {
             if(res.status == 200){
@@ -106,7 +93,6 @@ export class CustomerInfoDetailsComponent implements OnInit {
             return res;
           })
     
-      //console.log("customerinfo: " + JSON.stringify(res))
     });
   }
 

@@ -54,23 +54,12 @@ export class CustomerInfoAddComponent implements OnInit {
     data.state = values.state;
     data.zip = values.zip;
     data.comments = values.comments;
-    console.log("submit")
-    // //create new question
+    // //create new customer
     this.customerService.insertCustomer(data)
     .subscribe(res=> {
-      console.log(res);
-      console.log("dialog" + this.thisDialogRef);
       this.thisDialogRef.close(res)
     this.personForm.reset();
-   // return res;
-      //console.log("customerinfo: " + JSON.stringify(res))
     });
-
-    
-    // .then(question => {
-    //   this.thisDialogRef.close(question);
-    //   this.personForm.reset();
-    // });
   }
 
 }

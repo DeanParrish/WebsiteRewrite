@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { AuthService } from '@auth0/auth0-angular';
+import { AuthService } from 'src/app/services/authservice.service';
 import { LoginfirebaseComponent } from './../../components/loginfirebase/loginfirebase.component';
 @Component({
   selector: 'app-loginlink',

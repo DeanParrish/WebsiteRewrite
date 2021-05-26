@@ -10,4 +10,4 @@ RUN npm run build
 FROM nginx:latest
 COPY --from=build /app/dist/my-test-angular-app  /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-EXPOSE 80
+EXPOSE 80 443 3000 27017

@@ -9,7 +9,8 @@
       <label class="error">{{errorMessage}}</label>
       <label class="success">{{successMessage}}</label>
     </div>
-    <button type="submit" (click)="tryRegister(registerForm.value)" class="btn btn-default">Register</button>
+    <button type="submit" (click)="loginWithEmail(registerForm.value)" class="btn btn-default">Login</button>
+    <button (click)="registerRedirect()" class="btn btn-default">Register</button>
  </form>
 
  <div class='registerType'>
