@@ -101,7 +101,7 @@ router.get('/users', (req, res) => {
                 .catch(err => sendError(err, res));
         });
     }, err => {
-        if(err.code === "auth/argument-error"){
+        if(err.code === "auth/argument-error" || err.code === "auth/id-token-expired"){
             res.status(403);
             res.json(response);
         }else{
