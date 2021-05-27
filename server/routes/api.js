@@ -201,7 +201,8 @@ router.get('/recipes', (req, res) => {
     });
 });
 
-router.post('/insertrecipe', checkJwt, (req, res) => {
+router.post('/insertrecipe',  (req, res) => {
+    admin.auth().verifyIdToken(req.header("Authorization")).then(result => {
     connection((db) => {
         var data = new Recipe(req.body);
         console.log("inside api req.body: " + data)
@@ -217,8 +218,10 @@ router.post('/insertrecipe', checkJwt, (req, res) => {
             });
     });
 });
+});
 
-router.put("/updaterecipe/:id", checkJwt, (req, res) => {
+router.put("/updaterecipe/:id",  (req, res) => {
+    admin.auth().verifyIdToken(req.header("Authorization")).then(result => {
     connection((db) => {
         Recipe.updateOne({_id: req.params.id}, req.body,{upsert: true})
             .then(item => {
@@ -231,7 +234,7 @@ router.put("/updaterecipe/:id", checkJwt, (req, res) => {
             });
         res.data = "in update";
     });
-         
+}); 
     
 });
 

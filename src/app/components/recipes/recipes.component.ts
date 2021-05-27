@@ -6,7 +6,7 @@ import { RecipeDataService } from '../../services/recipe-data.service';
 import {Recipe} from '../../interfaces/recipe';
 import { EditrecipepopupComponent } from './editrecipepopup/editrecipepopup.component';
 
-import { AuthService } from '@auth0/auth0-angular/';
+import { AuthService } from '../../services/authservice.service';
 
 @Component({
   selector: 'app-recipes',
@@ -20,27 +20,35 @@ export class RecipesComponent implements OnInit {
   recipeDisplayData = new MatTableDataSource();
   categories: string[] = [];
   categorySelected: string;
-  userID: string;
+  uid: string;
 
-  constructor(public recipeService: RecipeDataService, public dialog: MatDialog, private auth: AuthService) { 
-    this.auth.idTokenClaims$.subscribe(res => {
-      if(res != null)
-        this.userID = res.sub;
-    })
+  constructor(public recipeService: RecipeDataService, public dialog: MatDialog, private auth: AuthService) {
+    // this.auth.getCurrentUserInfo().then(res => {
+    //   console.log(res);
+    //   if(res != null)
+    //     this.userInfo = res;
+    //     console.log(this.userInfo.userID);
+    // })
   }
 
   ngOnInit() {
-    this.recipeService.getAllRecipes()
-      .subscribe(res => {
-        for(var i in res.data){
-          if(this.categories === undefined || this.categories.find(x=>x === res.data[i].category) === undefined)
-            this.categories.push(res.data[i].category)
-        }
-        this.recipeSource = new MatTableDataSource(res.data);
-        this.recipeDisplayData = new MatTableDataSource(res.data);
-      })
+    this.auth.getCurrentUIDFromService().then(res => {
+      if(res != null)
+        this.uid = res;
 
-      
+        this.recipeService.getAllRecipes()
+        .subscribe(res => {
+          for(var i in res.data){
+            if(this.categories === undefined || this.categories.find(x=>x === res.data[i].category) === undefined)
+              this.categories.push(res.data[i].category)
+          }
+          this.recipeSource = new MatTableDataSource(res.data);
+          this.recipeDisplayData = new MatTableDataSource(res.data);
+        })
+    })
+    
+
+
   }
 
   openDetails(recipe){
@@ -71,7 +79,7 @@ public filterData = (value: string) => {
       return data.name.indexOf(filter) > -1 && data.category == this.categorySelected;
     }else{
       return data.name.indexOf(filter) > -1;
-    }    
+    }
    };
     this.recipeDisplayData.filter = value.trim();
   }

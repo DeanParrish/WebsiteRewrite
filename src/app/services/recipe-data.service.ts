@@ -3,27 +3,26 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
-import { AuthService } from '@auth0/auth0-angular/';
+import { AuthService } from './authservice.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeDataService {
   private headers = new HttpHeaders();
-  private userID: string;
+  private userInfo: any;
 
   public isIntialized = false;
 
   result: any;
   constructor(private _http: HttpClient, private auth: AuthService) {
-    this.auth.idTokenClaims$.subscribe(res => {
-      if(res != null){
-        this.headers = this.headers.set('Authorization', 'Bearer ' + res.__raw);
-        this.isIntialized = true;
-        this.userID = res.sub;
-      }
+    // this.auth.getCurrentUser().then(res => {
+    //   if(res != null){
+    //     this.isIntialized = true;
+    //     this.userInfo = res;
+    //   }
       
-    })
+    // })
    }
 
   getAllRecipes(){
@@ -32,7 +31,8 @@ export class RecipeDataService {
   }
 
   insertRecipe(values){
-    return this._http.post("/api/insertrecipe", values, {headers: this.headers})
+    console.log(this.auth.getCurrentUserToken())
+    return this._http.post("/api/insertrecipe", values, {headers: new HttpHeaders({'Authorization': this.auth.getCurrentUserToken()}) })
         .pipe(map((response: Response) => {
           console.log(response)
           return response;
@@ -40,7 +40,7 @@ export class RecipeDataService {
   }
 
   updateRecipe(id, values){
-    return this._http.put("/api/updaterecipe/" + id, values, {headers: this.headers})
+    return this._http.put("/api/updaterecipe/" + id, values, {headers: new HttpHeaders({'Authorization': this.auth.getCurrentUserToken()}) })
       .pipe(map((response: Response) => {
         console.log(response)
         return response;

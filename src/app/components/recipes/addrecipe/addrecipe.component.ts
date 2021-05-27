@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {RecipeDataService} from '../../../services/recipe-data.service';
 
-import { AuthService } from '@auth0/auth0-angular/'
+import { AuthService } from '../../../services/authservice.service'
 
 @Component({
   selector: 'app-addrecipe',
@@ -26,12 +26,11 @@ export class AddrecipeComponent implements OnInit {
   userID: string;
 
   constructor(private recipeService: RecipeDataService, private auth: AuthService, private router: Router) { 
-    this.auth.idTokenClaims$.subscribe(res => {
-      this.userID = res.sub;
-    })
+
   }
 
   ngOnInit() {
+    this.userID = this.auth.getCurrentUID()
     this.recipeForm = new FormGroup({
       name: new FormControl(this.name, [
         Validators.required

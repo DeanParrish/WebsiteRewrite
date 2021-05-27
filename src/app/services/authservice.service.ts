@@ -14,6 +14,16 @@ export class AuthService {
   getCurrentUID(){
     return localStorage.getItem("currentUID"); 
   }
+
+  getCurrentUIDFromService(){
+    return new Promise<any>((resolve) => {
+      this.afAuth.authState.subscribe(res => {
+        localStorage.setItem("currentUID", res.uid);
+        resolve(res.uid);
+      })
+       
+    });
+  }
   getCurrentUserToken(){
     return localStorage.getItem("currentUserToken"); 
   }
@@ -58,7 +68,7 @@ export class AuthService {
             "email": res.email,
             "userID": res.uid,
             "verified": res.emailVerified,
-            "jwt": res.getIdToken()
+            "jwt": this.getCurrentUserToken()
           })
         }else{
           resolve(null);
@@ -68,11 +78,15 @@ export class AuthService {
   })
   }
 
+  
+
   doEmailLogin(value){
     return new Promise<any>((resolve, reject) => {
       firebase.default.auth().signInWithEmailAndPassword(value.email, value.password)
         .then(res =>{
-          localStorage.setItem("currentUserToken", res.user.uid);
+          res.user.getIdToken().then(tok => {
+            localStorage.setItem("currentUserToken", tok);
+          })
           resolve(res);
         }, error => reject(error))
     })
