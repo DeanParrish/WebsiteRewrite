@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import * as firebase from 'firebase';
+import { response } from 'express';
+import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
@@ -18,8 +19,14 @@ export class AuthService {
   getCurrentUIDFromService(){
     return new Promise<any>((resolve) => {
       this.afAuth.authState.subscribe(res => {
-        localStorage.setItem("currentUID", res.uid);
-        resolve(res.uid);
+        if(res){
+          localStorage.setItem("currentUID", res.uid);
+          resolve(res.uid);
+        }else{
+          resolve(null);
+        }      
+      }, err => {
+        console.log(err);
       })
        
     });
