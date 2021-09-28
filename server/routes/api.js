@@ -1,10 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
-const ObjectID = require('mongodb').ObjectID;
-const jwt = require('express-jwt');
-const jwtAuthz = require('express-jwt-authz');
-const jwksRsa = require('jwks-rsa');
+
 const req = require('request');
 
 // Connect
@@ -200,6 +197,21 @@ router.get('/recipes', (req, res) => {
             });
     });
 });
+
+router.get('/userrecipes/:id', (req, res) => {
+    console.log(req.body);
+    admin.auth().verifyIdToken(req.header("Authorization")).then(result => {
+        connection((db) => {
+            db.collection("recipes").find({"userID": req.params.id}).toArray().then((recipes) =>{
+                response.data = recipes;
+                res.json(response);
+            })
+            .catch((err) => {
+                sendError(err, res);
+            })
+        });
+    });
+})
 
 router.post('/insertrecipe',  (req, res) => {
     admin.auth().verifyIdToken(req.header("Authorization")).then(result => {

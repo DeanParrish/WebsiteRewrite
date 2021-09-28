@@ -45,6 +45,8 @@ export class RecipesComponent implements OnInit {
           this.recipeSource = new MatTableDataSource(res.data);
           this.recipeDisplayData = new MatTableDataSource(res.data);
         })
+
+        this.recipeService.getCurrentUserRecipes();
     })
     
 

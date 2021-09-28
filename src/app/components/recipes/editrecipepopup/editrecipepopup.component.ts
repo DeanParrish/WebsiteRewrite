@@ -71,7 +71,7 @@ export class EditrecipepopupComponent implements OnInit {
 
       for(var i in this.steps){
         if(this.steps[i].stepInfo === ""){
-          this.steps = this.steps.splice(i, 1);
+          this.steps.splice(i, 1);
         }
       }
 

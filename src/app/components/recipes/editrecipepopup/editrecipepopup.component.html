@@ -17,7 +17,7 @@
         <mat-list>
             <mat-list-item *ngFor="let ing of ingredients; let i = index"><textarea name="ingredient_{{i}}" [(ngModel)]="ing.ingredientName" matInput placeholder="Ingredient" [ngModelOptions]="{standalone: true}"></textarea></mat-list-item>
         </mat-list>
-        <button type="button" (click)="addIngredient()">Add Ingredient</button>
+        <button mat-raised-button type="button" (click)="addIngredient()">Add Ingredient</button>
     </div>
     
     <div class="form-group">
@@ -25,7 +25,7 @@
         <mat-list>
             <mat-list-item *ngFor="let step of steps"><textarea name="step_{{i}}" [(ngModel)]="step.stepInfo" matInput placeholder="Step" [ngModelOptions]="{standalone: true}"></textarea></mat-list-item>
         </mat-list>
-        <button type="button" (click)="addStep()">Add Step</button>
+        <button mat-raised-button type="button" (click)="addStep()">Add Step</button>
     </div>
   
     <div class="form-group">

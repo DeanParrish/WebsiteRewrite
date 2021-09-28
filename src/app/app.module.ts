@@ -35,7 +35,7 @@ import { LoginlinkComponent } from './elements/loginlink/loginlink.component';
 import { LogoutlinkComponent } from './elements/logoutlink/logoutlink.component';
 
 import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+// import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { RegisterfirebaseComponent } from './components/registerfirebase/registerfirebase.component';
 import { LoginfirebaseComponent } from './components/loginfirebase/loginfirebase.component';

@@ -55,13 +55,27 @@ export class AddrecipeComponent implements OnInit {
     });
   }
   onSubmit(values){
-    console.log(this.recipeForm.valid)
     if(this.recipeForm.valid){
+      var validatedSteps = [];
+      //remove steps that have no content
+      for(var i in this.steps){
+        if(this.steps[i].stepInfo.trim() !=  ""){
+          validatedSteps.push(this.steps[i]);
+        }
+      }
+
+      var validatedIngredients = [];
+      //remove steps that have no content
+      for(var i in this.ingredients){
+        if(this.ingredients[i].ingredientName.trim() !=  ""){
+          validatedIngredients.push(this.ingredients[i]);
+        }
+      }
       let data: any = {};
       data.name = values.name;
       data.category = values.category;
-      data.ingredients = this.ingredients;
-      data.steps = this.steps;
+      data.ingredients = validatedIngredients;
+      data.steps = validatedSteps;
       data.link = values.link;
       data.userID = this.userID;
   

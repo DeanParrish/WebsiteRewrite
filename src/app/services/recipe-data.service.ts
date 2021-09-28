@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { AuthService } from './authservice.service';
@@ -30,8 +30,20 @@ export class RecipeDataService {
       .pipe(map((result: any) => this.result = result));
   }
 
+  getCurrentUserRecipes(){  
+    var body = {
+      "userID": this.auth.getCurrentUID()
+    }
+    return this._http.get("/api/userrecipes/" + this.auth.getCurrentUID(), {headers: new HttpHeaders({'Authorization': this.auth.getCurrentUserToken()})})
+      .pipe(map((response: any) => {
+        console.log(response)
+        return response;
+    }))
+    
+  }
+
   insertRecipe(values){
-    console.log(this.auth.getCurrentUserToken())
+
     return this._http.post("/api/insertrecipe", values, {headers: new HttpHeaders({'Authorization': this.auth.getCurrentUserToken()}) })
         .pipe(map((response: Response) => {
           console.log(response)
