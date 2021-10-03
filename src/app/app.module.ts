@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 
 import { AppComponent } from './app.component';
 import { CustomerInfoComponent } from './customer-info/customer-info.component';
@@ -128,6 +130,7 @@ export const appRoutes: Routes = [
 		AngularFireModule.initializeApp(env.firebase),
 		AngularFireAuthModule,
 		BrowserModule,
+		BrowserAnimationsModule,
 		SharedModule,
     RouterModule.forRoot(appRoutes,
       { useHash: false, relativeLinkResolution: 'legacy' }

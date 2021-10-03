@@ -3,5 +3,6 @@ export interface Recipe {
   category: String,
   ingredients: Array<string>,
   steps: Array<string>,
-  link: String
+  link: String,
+  userID: String
 }
