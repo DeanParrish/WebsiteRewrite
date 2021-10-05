@@ -177,7 +177,9 @@ var recipeSchema = new mongoose.Schema({
     ingredients: Array,
     steps: Array,
     link: String,
-    userID: String
+    userID: String,
+    isPrivate: Boolean,
+    description: String
 });
 
 var Recipe = mongoose.model("recipes", recipeSchema);
@@ -229,6 +231,8 @@ router.post('/insertrecipe',  (req, res) => {
                 sendError(err, res);
             });
     });
+}, err => {
+    sendError(err, res);
 });
 });
 

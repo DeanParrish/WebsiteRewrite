@@ -49,6 +49,7 @@ export class RecipesComponent implements OnInit {
   }
 
   openDetails(recipe) {
+    console.log(recipe);
     this.dialog.open(RecipepopupComponent, {
       data: recipe,
     });

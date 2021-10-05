@@ -43,7 +43,11 @@ export class EditrecipepopupComponent implements OnInit {
         Validators.required
       ]),
       link: new FormControl(),
+      isPrivate: new FormControl(),
+      description: new FormControl()
     });
+
+    this.recipeForm.patchValue({isPrivate: this.data.isPrivate, description: this.data.description})
     
   }
 
@@ -63,24 +67,30 @@ export class EditrecipepopupComponent implements OnInit {
     console.log(this.recipeForm.valid)
     if(this.recipeForm.valid){
       //clean up any empty ingredients/steps
+      var validatedSteps = [];
       for(var i in this.ingredients){
-        if(this.ingredients[i].ingredientName === ""){
-          this.ingredients.splice(i, 1);
+        if(this.steps[i].stepInfo.trim() !=  ""){
+          this.steps[i].stepNumber = validatedSteps.length;
+          validatedSteps.push(this.steps[i]);
         }
       }
 
+      var validatedIngredients = [];
       for(var i in this.steps){
-        if(this.steps[i].stepInfo === ""){
-          this.steps.splice(i, 1);
+        if(this.ingredients[i].ingredientName.trim() !=  ""){
+          this.ingredients[i].ingredientNumber = validatedIngredients.length;
+          validatedIngredients.push(this.ingredients[i]);
         }
       }
 
       let data: any = {};
       data.name = values.name;
       data.category = values.category;
-      data.ingredients = this.ingredients;
-      data.steps = this.steps;
+      data.ingredients = validatedIngredients;
+      data.steps = validatedSteps;
       data.link = values.link;
+      data.isPrivate = values.isPrivate;
+      data.description = values.description;
 
       this.recipeService.updateRecipe(this.data._id, data)
       .subscribe(res=> {

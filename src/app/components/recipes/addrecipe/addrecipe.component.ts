@@ -39,7 +39,8 @@ export class AddrecipeComponent implements OnInit {
         Validators.required
       ]),
       link: new FormControl(),
-      isPrivate: new FormControl()
+      isPrivate: new FormControl(),
+      description: new FormControl()
     });
   }
 
@@ -55,12 +56,15 @@ export class AddrecipeComponent implements OnInit {
       stepInfo: ''
     });
   }
+  
+  // TODO: Fix bug when adding ingredients/steps
   onSubmit(values){
     if(this.recipeForm.valid){
       var validatedSteps = [];
       //remove steps that have no content
       for(var i in this.steps){
         if(this.steps[i].stepInfo.trim() !=  ""){
+          this.steps[i].stepNumber = validatedSteps.length;
           validatedSteps.push(this.steps[i]);
         }
       }
@@ -69,6 +73,7 @@ export class AddrecipeComponent implements OnInit {
       //remove steps that have no content
       for(var i in this.ingredients){
         if(this.ingredients[i].ingredientName.trim() !=  ""){
+          this.ingredients[i].ingredientNumber = validatedIngredients.length;
           validatedIngredients.push(this.ingredients[i]);
         }
       }
@@ -79,17 +84,27 @@ export class AddrecipeComponent implements OnInit {
       data.steps = validatedSteps;
       data.link = values.link;
       data.userID = this.userID;
+      data.description = values.description;
 
       if (values.isPrivate === true) {
         data.isPrivate = true;
       }else{
         data.isPrivate = false;
-      }
-  
+      }  
+
       this.recipeService.insertRecipe(data)
       .subscribe(res => {
         this.recipeForm.reset();
         this.router.navigateByUrl("/recipes");
+      }, err => {
+        if (err.status == 501) {
+          this.auth.updateUserToken().then(res => {
+            this.recipeService.insertRecipe(data).subscribe(res => {
+              this.recipeForm.reset();
+              this.router.navigateByUrl("/recipes");
+            })
+          })
+        }
       })
     }
   }

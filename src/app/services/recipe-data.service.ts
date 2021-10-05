@@ -16,13 +16,7 @@ export class RecipeDataService {
 
   result: any;
   constructor(private _http: HttpClient, private auth: AuthService) {
-    // this.auth.getCurrentUser().then(res => {
-    //   if(res != null){
-    //     this.isIntialized = true;
-    //     this.userInfo = res;
-    //   }
-      
-    // })
+
    }
 
   getAllRecipes(){

@@ -3,6 +3,16 @@
   <div mat-dialog-content>
     <i>{{this.data.category}}</i><br/><br/>
 
+    <div *ngIf="this.data.isPrivate == true">
+      This recipe is only shown to you
+      <br/>
+    </div>
+
+    <div *ngIf="this.data.description">
+      {{this.data.description}}
+      <br/>
+    </div>
+    
     <b>Ingredients:</b>
     <ul>
       <li *ngFor="let ingredient of this.data.ingredients">{{ingredient.ingredientName}}</li>

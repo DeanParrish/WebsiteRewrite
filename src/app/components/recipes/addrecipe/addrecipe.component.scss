@@ -6,6 +6,8 @@
     max-width: 65%;
     border-radius: 10px;
     opacity: 0.95;
+    max-height: 85vh;
+    overflow-y: scroll;
     @include breakpoint("tablet") {
         max-width: 100%;
     }
@@ -26,7 +28,7 @@
 .formContainer{
     
     padding: 5%;
-    min-height: 100vh;
+    min-height: 100vh;   
     background: url(/assets/images/pizzaBackground.jpg);
     background-position: right;
     background-size: cover;
