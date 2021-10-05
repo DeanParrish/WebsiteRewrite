@@ -1,5 +1,32 @@
+@import "src/app/styles/_breakpoint.scss";
+
 .form{
-    padding-left: 5%;
+    background-color: white;
+    padding: 5%;
+    max-width: 75%;
+    border-radius: 10px;
+    opacity: 0.95;
+    @include breakpoint("tablet") {
+        max-width: 100%;
+    }
+
+    @include breakpoint("phablet") {
+        max-width: 100%;
+    }
+
+    @include breakpoint("mobileonly") {
+        max-width: 100%;
+    }
+}
+
+
+.formContainer{
+    
+    padding: 5%;
+    min-height: 100vh;
+    background: url(/assets/images/pizzaBackground.jpg);
+    background-position: right;
+    background-size: cover;
 }
 
 textarea{

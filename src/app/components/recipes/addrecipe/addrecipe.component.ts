@@ -39,6 +39,7 @@ export class AddrecipeComponent implements OnInit {
         Validators.required
       ]),
       link: new FormControl(),
+      isPrivate: new FormControl()
     });
   }
 
@@ -78,6 +79,12 @@ export class AddrecipeComponent implements OnInit {
       data.steps = validatedSteps;
       data.link = values.link;
       data.userID = this.userID;
+
+      if (values.isPrivate === true) {
+        data.isPrivate = true;
+      }else{
+        data.isPrivate = false;
+      }
   
       this.recipeService.insertRecipe(data)
       .subscribe(res => {

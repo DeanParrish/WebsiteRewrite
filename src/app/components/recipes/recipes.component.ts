@@ -5,7 +5,6 @@ import { RecipepopupComponent } from "./recipepopup/recipepopup.component";
 import { RecipeDataService } from "../../services/recipe-data.service";
 import { Recipe } from "../../interfaces/recipe";
 import { EditrecipepopupComponent } from "./editrecipepopup/editrecipepopup.component";
-import { MatCheckboxModule } from "@angular/material";
 
 import { AuthService } from "../../services/authservice.service";
 
