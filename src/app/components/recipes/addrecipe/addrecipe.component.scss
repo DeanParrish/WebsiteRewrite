@@ -2,8 +2,8 @@
 
 .form{
     background-color: white;
-    padding: 5%;
-    max-width: 75%;
+    padding: 3% 5%;
+    max-width: 65%;
     border-radius: 10px;
     opacity: 0.95;
     @include breakpoint("tablet") {
@@ -18,6 +18,9 @@
         max-width: 100%;
     }
 }
+.mat-form-field{
+    width:100% !important;
+ }
 
 
 .formContainer{

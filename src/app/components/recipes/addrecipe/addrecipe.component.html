@@ -1,55 +1,95 @@
 <!-- Background photo by Chad Montano https://unsplash.com/@briewilly -->
 <div class="formContainer">
-  <form [formGroup]="recipeForm" class="form" (ngSubmit)="onSubmit(recipeForm.value)">
+  <form
+    [formGroup]="recipeForm"
+    class="form"
+    (ngSubmit)="onSubmit(recipeForm.value)"
+  >
     <h3>Add New Recipe</h3>
     <div class="form-group">
-        <mat-form-field>
-          <input required matInput formControlName="name" placeholder="Name"/>
-        </mat-form-field>
+      <mat-form-field>
+        <input required matInput formControlName="name" placeholder="Name" />
+      </mat-form-field>
     </div>
-  
+
     <div class="form-group">
       <div>
-        <mat-checkbox
-        formControlName="isPrivate"
-          class="example-margin"
+        <mat-checkbox formControlName="isPrivate" class="example-margin"
           >Keep this recipe private</mat-checkbox
         >
       </div>
-            
     </div>
 
     <div class="form-group">
       <mat-form-field>
-        <input required matInput formControlName="category" placeholder="Category"/>
+        <input
+          required
+          matInput
+          formControlName="category"
+          placeholder="Category"
+        />
       </mat-form-field>
-  </div>
-    
+    </div>
+
     <div class="form-group">
       Ingredients:
-        <mat-list>
-            <mat-list-item *ngFor="let ing of ingredients; let i = index"><textarea name="ingredient_{{i}}" [(ngModel)]="ing.ingredientName" matInput placeholder="Ingredient" [ngModelOptions]="{standalone: true}"></textarea></mat-list-item>
-        </mat-list>
-        <button mat-raised-button type="button" (click)="addIngredient()">Add Ingredient</button>
+      <mat-list>
+        <mat-list-item *ngFor="let ing of ingredients; let i = index">
+          <textarea
+            name="ingredient_{{ i }}"
+            [(ngModel)]="ing.ingredientName"
+            matInput
+            placeholder="Ingredient"
+            [ngModelOptions]="{ standalone: true }"
+          ></textarea>
+        </mat-list-item>
+      </mat-list>
+      <button mat-raised-button type="button" (click)="addIngredient()">
+        Add Ingredient
+      </button>
     </div>
-    
+
     <div class="form-group">
       Steps:
-        <mat-list>
-            <mat-list-item *ngFor="let step of steps"><textarea name="step_{{i}}" [(ngModel)]="step.stepInfo" matInput placeholder="Step" [ngModelOptions]="{standalone: true}"></textarea></mat-list-item>
-        </mat-list>
-        <button mat-raised-button type="button" (click)="addStep()">Add Step</button>
+      <mat-list>
+        <mat-list-item *ngFor="let step of steps">
+          <textarea
+            name="step_{{ i }}"
+            [(ngModel)]="step.stepInfo"
+            matInput
+            placeholder="Step"
+            [ngModelOptions]="{ standalone: true }"
+          ></textarea>
+        </mat-list-item>
+      </mat-list>
+      <button mat-raised-button type="button" (click)="addStep()">
+        Add Step
+      </button>
     </div>
-  
+
     <div class="form-group">
-        <mat-form-field>
-          <input matInput formControlName="link" placeholder="Link"/>
-        </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="link" placeholder="Link" />
+      </mat-form-field>
     </div>
-  
-  <div class="alert-modal-buttons">
-    <button mat-raised-button color="primary" class="alert-modal-button alert-modal-button-success" type="submit">Add</button>
-    <button routerLink="/recipes" mat-raised-button class="alert-modal-button alert-modal-button-failure" type="button">Cancel</button>
-  </div>
+
+    <div class="alert-modal-buttons">
+      <button
+        mat-raised-button
+        color="primary"
+        class="alert-modal-button alert-modal-button-success"
+        type="submit"
+      >
+        Add
+      </button>
+      <button
+        routerLink="/recipes"
+        mat-raised-button
+        class="alert-modal-button alert-modal-button-failure"
+        type="button"
+      >
+        Cancel
+      </button>
+    </div>
   </form>
 </div>
