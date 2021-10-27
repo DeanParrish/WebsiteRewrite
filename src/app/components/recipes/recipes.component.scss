@@ -1,15 +1,66 @@
+@import "src/app/styles/_breakpoint.scss";
 $small: 900px;
 
-.app-recipes{
-    padding: 5%;
-    overflow: hidden;
-}
+// .app-recipes{
+//     padding: 5%;
+//     overflow: hidden;
+// }
 
 table{
-    width: 50%;
-    @media screen and (max-width: $small) {
-        width:  100%;
+    width: 75%;
+    @include breakpoint("tablet") {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    @include breakpoint("phablet") {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    @include breakpoint("mobileonly") {
+        max-width: 100%;
+        width: 100%;
     }
 
     overflow: hidden;
+}
+
+.form{
+    background-color: white;
+    padding: 3% 5%;
+    max-width: 65%;
+    border-radius: 10px;
+    opacity: 0.95;
+    max-height: 85vh;
+    overflow-y: scroll;
+    @include breakpoint("tablet") {
+        max-width: 100%;
+    }
+
+    @include breakpoint("phablet") {
+        max-width: 100%;
+    }
+
+    @include breakpoint("mobileonly") {
+        max-width: 100%;
+    }
+}
+.mat-form-field{
+    width:100% !important;
+ }
+
+
+.container{
+    
+    padding: 5%;
+    min-height: 100vh;   
+    background: url(/assets/images/picGrill.jpg);
+    background-position: right;
+    background-size: cover;
+    min-width: 100%;
+}
+
+textarea{
+    resize: none;
 }

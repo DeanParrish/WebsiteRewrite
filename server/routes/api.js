@@ -191,8 +191,27 @@ router.get('/recipes', (req, res) => {
             .find()
             .toArray()
             .then((recipes) => {
-                response.data = recipes;
-                res.json(response);
+                
+                if (req.header("Authorization") != null) {
+                    admin.auth().verifyIdToken(req.header("Authorization")).then(decodedToken => {
+                        var pubArray = recipes.filter(function(recipe){
+                            return recipe.isPrivate == false;
+                        });
+                        var privArray = recipes.filter(function(recipe){
+                            return recipe.isPrivate == true && recipe.userID == decodedToken.uid;
+                        });
+
+                        response.data = [...pubArray, ...privArray];
+                        res.json(response);
+                    });
+                }else{//non authenicated route
+                    var pubArray = recipes.filter(function(recipe){
+                        return recipe.isPrivate == false;
+                    });
+                    response.data = pubArray;
+                    res.json(response);
+                }
+                
             })
             .catch((err) => {
                 sendError(err, res);

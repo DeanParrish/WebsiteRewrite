@@ -20,8 +20,24 @@ export class RecipeDataService {
    }
 
   getAllRecipes(){
-    return this._http.get("/api/recipes", {headers: this.headers})
+    var token = this.auth.getCurrentUserToken();
+    if(token != null){
+      return this._http.get("/api/recipes", {headers: new HttpHeaders({'Authorization': token})})
       .pipe(map((result: any) => this.result = result));
+    }else{
+      return this._http.get("/api/recipes")
+      .pipe(map((result: any) => this.result = result))
+    }
+    // this.auth.isUserAuthenicated().then(res => {
+    //   if(res == true){
+    //     Promise.resolve(this._http.get("/api/recipes", {headers: new HttpHeaders({'Authorization': this.auth.getCurrentUserToken()})})
+    //   .pipe(map((result: any) => this.result = result)));
+    //   }else{
+    //     Promise.resolve(this._http.get("/api/recipes")
+    //   .pipe(map((result: any) => this.result = result)));
+    //   }
+    // })
+    
   }
 
   getCurrentUserRecipes(){  

@@ -30,26 +30,24 @@ export class RecipesComponent implements OnInit {
   ngOnInit() {
     this.auth.getCurrentUIDFromService().then((res) => {
       if (res != null) this.uid = res;
-
-      this.recipeService.getAllRecipes().subscribe((res) => {
-        for (var i in res.data) {
+      this.recipeService.getAllRecipes().subscribe(data => {
+        for (var i in data.data) {
           if (
             this.categories === undefined ||
-            this.categories.find((x) => x === res.data[i].category) ===
+            this.categories.find((x) => x === data.data[i].category) ===
               undefined
           )
-            this.categories.push(res.data[i].category);
+            this.categories.push(data.data[i].category);
         }
-        this.recipeSource = new MatTableDataSource(res.data);
-        this.recipeDisplayData = new MatTableDataSource(res.data);
+        this.recipeSource = new MatTableDataSource(data.data);
+        this.recipeDisplayData = new MatTableDataSource(data.data);
       });
 
-      this.recipeService.getCurrentUserRecipes();
+      //this.recipeService.getCurrentUserRecipes();
     });
   }
 
   openDetails(recipe) {
-    console.log(recipe);
     this.dialog.open(RecipepopupComponent, {
       data: recipe,
     });
