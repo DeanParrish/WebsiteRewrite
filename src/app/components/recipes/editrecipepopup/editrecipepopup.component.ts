@@ -68,7 +68,7 @@ export class EditrecipepopupComponent implements OnInit {
     if(this.recipeForm.valid){
       //clean up any empty ingredients/steps
       var validatedSteps = [];
-      for(var i in this.ingredients){
+      for(var i in this.steps){
         if(this.steps[i].stepInfo.trim() !=  ""){
           this.steps[i].stepNumber = validatedSteps.length;
           validatedSteps.push(this.steps[i]);
@@ -76,7 +76,7 @@ export class EditrecipepopupComponent implements OnInit {
       }
 
       var validatedIngredients = [];
-      for(var i in this.steps){
+      for(var i in this.ingredients){
         if(this.ingredients[i].ingredientName.trim() !=  ""){
           this.ingredients[i].ingredientNumber = validatedIngredients.length;
           validatedIngredients.push(this.ingredients[i]);

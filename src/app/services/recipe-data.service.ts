@@ -27,17 +27,7 @@ export class RecipeDataService {
     }else{
       return this._http.get("/api/recipes")
       .pipe(map((result: any) => this.result = result))
-    }
-    // this.auth.isUserAuthenicated().then(res => {
-    //   if(res == true){
-    //     Promise.resolve(this._http.get("/api/recipes", {headers: new HttpHeaders({'Authorization': this.auth.getCurrentUserToken()})})
-    //   .pipe(map((result: any) => this.result = result)));
-    //   }else{
-    //     Promise.resolve(this._http.get("/api/recipes")
-    //   .pipe(map((result: any) => this.result = result)));
-    //   }
-    // })
-    
+    }  
   }
 
   getCurrentUserRecipes(){  
@@ -46,7 +36,6 @@ export class RecipeDataService {
     }
     return this._http.get("/api/userrecipes/" + this.auth.getCurrentUID(), {headers: new HttpHeaders({'Authorization': this.auth.getCurrentUserToken()})})
       .pipe(map((response: any) => {
-        console.log(response)
         return response;
     }))
     
@@ -56,7 +45,6 @@ export class RecipeDataService {
 
     return this._http.post("/api/insertrecipe", values, {headers: new HttpHeaders({'Authorization': this.auth.getCurrentUserToken()}) })
         .pipe(map((response: Response) => {
-          console.log(response)
           return response;
       }))
   }
@@ -64,7 +52,6 @@ export class RecipeDataService {
   updateRecipe(id, values){
     return this._http.put("/api/updaterecipe/" + id, values, {headers: new HttpHeaders({'Authorization': this.auth.getCurrentUserToken()}) })
       .pipe(map((response: Response) => {
-        console.log(response)
         return response;
     })) 
   }
