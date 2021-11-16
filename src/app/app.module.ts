@@ -43,6 +43,7 @@ import { RegisterfirebaseComponent } from './components/registerfirebase/registe
 import { LoginfirebaseComponent } from './components/loginfirebase/loginfirebase.component';
 import { AuthGuard } from './authguard/authguard.component';
 import { AuthService } from './services/authservice.service';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 //import { environment } from '../environments/environment';
 
 //import { HomepagePipe } from './homepage.pipe';
@@ -152,7 +153,11 @@ export const appRoutes: Routes = [
 		NavbarComponent,
 		UserService,
 		AuthService,
-		
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: AuthInterceptor,
+			multi: true
+		   }
 	],
   bootstrap: [AppComponent]
 })

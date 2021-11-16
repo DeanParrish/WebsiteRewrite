@@ -1,5 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 import { MatTableDataSource } from "@angular/material";
+import {MatPaginator} from '@angular/material/paginator';
 import { MatDialog } from "@angular/material/dialog";
 import { RecipepopupComponent } from "./recipepopup/recipepopup.component";
 import { RecipeDataService } from "../../services/recipe-data.service";
@@ -13,21 +14,32 @@ import { AuthService } from "../../services/authservice.service";
   templateUrl: "./recipes.component.html",
   styleUrls: ["./recipes.component.scss"],
 })
-export class RecipesComponent implements OnInit {
+export class RecipesComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ["name", "category", "actions"];
   recipeSource = new MatTableDataSource();
   recipeDisplayData = new MatTableDataSource();
   categories: string[] = [];
   categorySelected: string;
   uid: string;
+  isAuthenticated: any;
 
   constructor(
     public recipeService: RecipeDataService,
     public dialog: MatDialog,
     private auth: AuthService
-  ) {}
+  ) {
+    auth.isUserAuthenicated().then((res) => {
+      this.isAuthenticated = res.isUserLoggedIn;
+    });
+  }
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit() {
+    
+  }
+
+  ngAfterViewInit() {
     this.auth.getCurrentUIDFromService().then((res) => {
       if (res != null) this.uid = res;
       this.recipeService.getAllRecipes().subscribe(data => {
@@ -41,10 +53,11 @@ export class RecipesComponent implements OnInit {
         }
         this.recipeSource = new MatTableDataSource(data.data);
         this.recipeDisplayData = new MatTableDataSource(data.data);
+        this.recipeDisplayData.paginator = this.paginator;
       });
 
-      //this.recipeService.getCurrentUserRecipes();
     });
+    
   }
 
   openDetails(recipe) {
@@ -67,9 +80,9 @@ export class RecipesComponent implements OnInit {
     this.categorySelected = category;
   }
 
-  public filterData = (value: string) => {
+  filterData(value: string) {
     this.recipeDisplayData.filterPredicate = (data: Recipe, filter: string) => {
-      if (this.categorySelected != "") {
+      if (this.categorySelected) {
         return (
           data.name.indexOf(filter) > -1 &&
           data.category == this.categorySelected
@@ -78,7 +91,8 @@ export class RecipesComponent implements OnInit {
         return data.name.indexOf(filter) > -1;
       }
     };
-    this.recipeDisplayData.filter = value.trim();
+    console.log(this.categorySelected);
+    this.recipeDisplayData.filter = value;
   };
 
   filterUserReciple(e) {

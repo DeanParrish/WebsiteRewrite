@@ -25,7 +25,8 @@ import {
   MatRadioModule,
   MatTabsModule,
   MatSelectModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatPaginatorModule
 } from '@angular/material';
 
 //import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
@@ -59,7 +60,8 @@ import {
     MatSelectModule,
     // SDKBrowserModule.forRoot(),
     BrowserAnimationsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatPaginatorModule
     //SlugifyPipe
   ],
   providers: [
@@ -89,7 +91,8 @@ import {
     MatRadioModule,
     MatSelectModule,
     MatTabsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatPaginatorModule
   ]
 })
 export class SharedModule { }

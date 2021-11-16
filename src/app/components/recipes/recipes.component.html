@@ -26,12 +26,12 @@
       >
 
       <br /><br />
-      <a routerLink="addrecipe">Add Recipe</a>
+      <a *ngIf="this.isAuthenticated == true" routerLink="addrecipe">Add Recipe</a>
     </div>
     <br /><br />
     <table
       mat-table
-      [dataSource]="recipeDisplayData.filteredData"
+      [dataSource]="recipeDisplayData"
       class="mat-elevation-z8"
     >
       <ng-container matColumnDef="name">
@@ -58,5 +58,10 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let recipe; columns: displayedColumns"></tr>
     </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+    [pageSize]="10"
+                 showFirstLastButtons 
+                 aria-label="Select page of recipes">
+  </mat-paginator>
   </div>
 </div>
