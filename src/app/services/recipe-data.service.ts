@@ -21,7 +21,7 @@ export class RecipeDataService {
 
   getAllRecipes(){
     var token = this.auth.getCurrentUserToken();
-    if(token != null){
+    if(token){
       return this._http.get("/api/recipes", {headers: new HttpHeaders({'Authorization': token})})
       .pipe(map((result: any) => this.result = result));
     }else{

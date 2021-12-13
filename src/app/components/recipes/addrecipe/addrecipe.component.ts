@@ -96,15 +96,6 @@ export class AddrecipeComponent implements OnInit {
       .subscribe(res => {
         this.recipeForm.reset();
         this.router.navigateByUrl("/recipes");
-      }, err => {
-        if (err.status == 501) {
-          this.auth.updateUserToken().then(res => {
-            this.recipeService.insertRecipe(data).subscribe(res => {
-              this.recipeForm.reset();
-              this.router.navigateByUrl("/recipes");
-            })
-          })
-        }
       })
     }
   }

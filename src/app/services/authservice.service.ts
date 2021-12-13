@@ -56,7 +56,7 @@ export class AuthService {
         firebase.default.auth().currentUser.getIdToken(true).then(res => {
           if(res){
             localStorage.setItem("currentUserToken", res);
-            resolve({"updated": true});
+            resolve({"updated": true, "token": res});
           }else{
             resolve({"updated": false});
           }
