@@ -2,7 +2,7 @@
 FROM node:14-alpine as build
 WORKDIR /app
 COPY . . 
-RUN npm install
+RUN npm ci
 RUN npm run build --prod
 
 
