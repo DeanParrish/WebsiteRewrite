@@ -8,5 +8,6 @@ export const environment = {
   redirectUri: window.location.origin,
   cacheLocation: "localstorage" as CacheLocation,
   useRefreshTokens: true,
-  firebase: firebase
+  firebase: firebase,
+  api_connector: "http://localhost:27017"
 };
