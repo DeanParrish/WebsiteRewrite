@@ -34,6 +34,21 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        
+      - name: Create Auth Config
+        id: create-json
+        uses: jsdaniell/create-json@1.1.2
+        with:
+          name: "auth_config.json"
+          json: ${{ secrets.AUTHCONFIG }}
+          dir: '/src'
+          
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: npm-   
 
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
