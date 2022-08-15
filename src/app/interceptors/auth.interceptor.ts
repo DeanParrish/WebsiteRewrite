@@ -42,7 +42,7 @@ export class AuthInterceptor implements HttpInterceptor {
         }
       }
 
-      if(!request.url.includes('auth/signin') && error.error.status === 501 && error.error.message.includes("Decoding Firebase ID token failed.")){
+      if(!request.url.includes('auth/signin') && (error.error.status === 501 && error.error.message.includes("Decoding Firebase ID token failed.")) || (error.error.status === 403 && error.error.message.includes("Firebase ID token has expired"))){
         if(!this.isRefreshing){
           this.isRefreshing = true;
 
