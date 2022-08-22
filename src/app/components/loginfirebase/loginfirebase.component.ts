@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '../../services/authservice.service';
-import { MatDialog, MatIconRegistry } from '@angular/material';
-
+import { MatDialog } from '@angular/material/dialog';
+import { MatIconRegistry } from '@angular/material/icon';
 import { RegisterfirebaseComponent } from './../registerfirebase/registerfirebase.component';
 import { DomSanitizer } from '@angular/platform-browser';
 
