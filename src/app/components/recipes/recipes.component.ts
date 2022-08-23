@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
-import { MatTableDataSource } from "@angular/material";
+import { MatTableDataSource } from "@angular/material/table";
 import {MatPaginator} from '@angular/material/paginator';
 import { MatDialog } from "@angular/material/dialog";
 import { RecipepopupComponent } from "./recipepopup/recipepopup.component";

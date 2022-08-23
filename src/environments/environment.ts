@@ -2,18 +2,18 @@
 // `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import { domain, clientId, firebase  } from '../auth_config.json';
-import { CacheLocation } from '@auth0/auth0-spa-js';
+import authConfig from '../auth_config.json'
+import { CacheLocation } from "@auth0/auth0-spa-js";
 
 export const environment = {
   production: false,
-  domain,
-    clientId,
-    redirectUri: window.location.origin,
-    cacheLocation: "localstorage" as CacheLocation,
-    useRefreshTokens: true,
-    firebase: firebase,
-    api_connector: "http://backend-app:2001"
+  domain: authConfig.domain,
+  clientId: authConfig.clientId,
+  redirectUri: window.location.origin,
+  cacheLocation: "localstorage" as CacheLocation,
+  useRefreshTokens: true,
+  firebase: authConfig.firebase,
+  api_connector: "http://backend-app:2001",
 };
 
 /*

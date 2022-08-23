@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, ElementRef, ViewChild  } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CurrencyResult } from './CurrencyList';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 import { Chart } from 'chart.js';
 import { Title  } from "@angular/platform-browser";
 

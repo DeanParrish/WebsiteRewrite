@@ -125,7 +125,7 @@ export const appRoutes: Routes = [
 		LoginlinkComponent,
 		LogoutlinkComponent,
 		RegisterfirebaseComponent,
-		LoginfirebaseComponent
+		LoginfirebaseComponent,
   ],
   imports: [
 		AngularFireModule.initializeApp(env.firebase),
