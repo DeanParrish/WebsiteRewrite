@@ -2,8 +2,8 @@
 FROM node:14-alpine as build
 WORKDIR /app
 COPY . .
-RUN npm install
-RUN npm run build --prod
+RUN yarn
+RUN yarn run buildprod
 
 
 # Stage 1: serve app with nginx server
