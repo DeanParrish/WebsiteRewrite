@@ -19,7 +19,6 @@ export class LogoutlinkComponent implements OnInit {
 
   logout(): void {
     this.auth.doLogOut();
-    location.reload();
   }
 
 }

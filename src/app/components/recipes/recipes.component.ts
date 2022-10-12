@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
-import {MatPaginator} from '@angular/material/paginator';
+import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
 import { RecipepopupComponent } from "./recipepopup/recipepopup.component";
 import { RecipeDataService } from "../../services/recipe-data.service";
@@ -21,43 +21,45 @@ export class RecipesComponent implements OnInit, AfterViewInit {
   categories: string[] = [];
   categorySelected: string;
   uid: string;
-  isAuthenticated: any;
 
   constructor(
     public recipeService: RecipeDataService,
     public dialog: MatDialog,
-    private auth: AuthService
+    public auth: AuthService
   ) {
-    auth.isUserAuthenicated().then((res) => {
-      this.isAuthenticated = res.isUserLoggedIn;
+    this.auth.loggedIn$.subscribe((res) => {
+      if (res) 
+      this.auth.getCurrentUserInfo().subscribe(
+        (user) => {
+          if(user){
+            this.uid = user.uid;
+          }
+          
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
     });
   }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() {}
 
   ngAfterViewInit() {
-    this.auth.getCurrentUIDFromService().then((res) => {
-      if (res != null) this.uid = res;
-      this.recipeService.getAllRecipes().subscribe(data => {
-        for (var i in data.data) {
-          if (
-            this.categories === undefined ||
-            this.categories.find((x) => x === data.data[i].category) ===
-              undefined
-          )
-            this.categories.push(data.data[i].category);
-        }
-        this.recipeSource = new MatTableDataSource(data.data);
-        this.recipeDisplayData = new MatTableDataSource(data.data);
-        this.recipeDisplayData.paginator = this.paginator;
-      });
-
+    this.recipeService.getAllRecipes().subscribe((data) => {
+      for (var i in data.data) {
+        if (
+          this.categories === undefined ||
+          this.categories.find((x) => x === data.data[i].category) === undefined
+        )
+          this.categories.push(data.data[i].category);
+      }
+      this.recipeSource = new MatTableDataSource(data.data);
+      this.recipeDisplayData = new MatTableDataSource(data.data);
+      this.recipeDisplayData.paginator = this.paginator;
     });
-    
   }
 
   openDetails(recipe) {
@@ -91,9 +93,8 @@ export class RecipesComponent implements OnInit, AfterViewInit {
         return data.name.indexOf(filter) > -1;
       }
     };
-    console.log(this.categorySelected);
     this.recipeDisplayData.filter = value;
-  };
+  }
 
   filterUserReciple(e) {
     if (e.checked == true) {

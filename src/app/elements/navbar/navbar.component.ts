@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/authservice.service';
-// import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-navbar',
@@ -10,11 +10,8 @@ import { AuthService } from 'src/app/services/authservice.service';
 export class NavbarComponent implements OnInit {
 
   activeNode: string;
-  isAuthenticated: any;
   constructor(public auth: AuthService) {
-    auth.isUserAuthenicated().then((res) => {
-      this.isAuthenticated = res.isUserLoggedIn;
-    });
+
    }
 
   ngOnInit() {

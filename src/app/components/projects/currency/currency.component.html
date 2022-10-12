@@ -12,7 +12,7 @@
       </ng-container>
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row  (click)="console.log(person)" *matRowDef="let person; columns: displayedColumns;"></tr>
+      <tr mat-row *matRowDef="let person; columns: displayedColumns;"></tr>
     </table>
     <p>...</p>
   </mat-tab>

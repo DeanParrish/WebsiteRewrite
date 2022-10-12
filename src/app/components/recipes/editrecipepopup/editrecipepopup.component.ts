@@ -64,7 +64,6 @@ export class EditrecipepopupComponent implements OnInit {
     });
   }
   onSubmit(values){
-    console.log(this.recipeForm.valid)
     if(this.recipeForm.valid){
       //clean up any empty ingredients/steps
       var validatedSteps = [];

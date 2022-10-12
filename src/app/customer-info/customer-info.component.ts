@@ -51,14 +51,12 @@ export class CustomerInfoComponent implements OnInit {
 
   handleErrors(err){
       if(err.status === 403){
-        this.auth.isUserAuthenicated().then(res => {
-          if(res.isUserLoggedIn == true){
+        this.auth.loggedIn$.subscribe(res => {
+          if(res == true)
             this.auth.updateUserToken().then(res => {
-              if(res.updated == true){
-                this.ngOnInit();
-              }
+              if(res.updated == true)
+                this.ngOnInit()
             })
-          }
         })
       } 
   }

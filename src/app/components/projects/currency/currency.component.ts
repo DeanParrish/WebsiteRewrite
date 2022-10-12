@@ -37,7 +37,6 @@ export class CurrencyComponent implements OnInit  {
     this.httpClient.get<CurrencyResult>(this._urlProd + this.currentAction + this._currencyParams)//urlLatest for local; proxy for server use since can't use SSL for this
       .subscribe(res => {  
         this.currencyList = res;
-        console.log(res);
         for(var i in this.currencyList.rates){
           var rateObj:any = {};
           rateObj.currency = i;
@@ -94,19 +93,14 @@ export class CurrencyComponent implements OnInit  {
     if(this.historicalDate != null){
       //get historcal point selected, then compare to today's value
       let dateSelected = new Date(this.historicalDate);
-      console.log(this.historicalDate + "---> " + dateSelected);
       let month = ((dateSelected.getMonth()+1) < 10) ? "0" + (dateSelected.getMonth()+1) : (dateSelected.getMonth()+1);
       let day = (dateSelected.getDate() < 10) ? "0" + (dateSelected.getDate()) : dateSelected.getDate();
       let parsedDate = dateSelected.getFullYear() + "-" + month + "-" + day;
-      console.log(parsedDate);
       let urlhistorical = "http://data.fixer.io/api/" + parsedDate + "?access_key=7dc5f63c9c54c7d04bdfb33691a41f23&symbols=" + val;
 
 
       this.httpClient.get<CurrencyResult>(this._urlProd + parsedDate + this._currencyParams + "&symbols=" + val)
         .subscribe(res => { 
-          console.log(res);
-          console.log(this.currencyObjectList)
-          console.log(this.currencyList);
           this.historicalDateArray = [];
           this.historicalRateArray = [];
           this.historicalDateArray.push(res.date)
@@ -117,8 +111,7 @@ export class CurrencyComponent implements OnInit  {
           this.historicalRateArray.push(this.currencyList.rates[this.historicalCurrency])
           this.chart.data.datasets[0].data = this.historicalRateArray;
           this.chart.data.labels = this.historicalDateArray;
-          console.log(this.historicalDateArray);
-          console.log(this.historicalRateArray)
+
           this.chart.update();
         })
     }    
@@ -127,17 +120,12 @@ export class CurrencyComponent implements OnInit  {
     if(this.historicalCurrency != null){
       //get historcal point selected, then compare to today's value
       let dateSelected = new Date(this.historicalDate);
-      console.log(this.historicalDate + "---> " + dateSelected);
       let month = ((dateSelected.getMonth()+1) < 10) ? "0" + (dateSelected.getMonth()+1) : (dateSelected.getMonth()+1);
       let day = (dateSelected.getDate() < 10) ? "0" + (dateSelected.getDate()) : dateSelected.getDate();
       let parsedDate = dateSelected.getFullYear() + "-" + month + "-" + day;
-      console.log(parsedDate);
       let urlhistorical = "http://data.fixer.io/api/" + parsedDate + "?access_key=7dc5f63c9c54c7d04bdfb33691a41f23&symbols=" + this.historicalCurrency;
       this.httpClient.get<CurrencyResult>(this._urlProd + parsedDate + this._currencyParams + "&symbols=" + this.historicalCurrency)
       .subscribe(res => { 
-        console.log(res);
-        console.log(this.currencyObjectList)
-        console.log(this.currencyList);
         this.historicalDateArray = [];
         this.historicalRateArray = [];
         this.historicalDateArray.push(res.date)
@@ -148,17 +136,12 @@ export class CurrencyComponent implements OnInit  {
         this.historicalRateArray.push(this.currencyList.rates[this.historicalCurrency])
         this.chart.data.datasets[0].data = this.historicalRateArray;
         this.chart.data.labels = this.historicalDateArray;
-        console.log(this.historicalDateArray);
-        console.log(this.historicalRateArray)
         this.chart.update();
       })
     }
   }
 
   convertCurrency(){
-    console.log(this.convertCurrencyFrom);
-    console.log(this.convertCurrencyTo);
-    console.log(this.convertAmount);
     if(this.convertCurrencyFrom != null && this.convertCurrencyTo != null){
       let currencyFromEuroValue = 1/this.currencyList.rates[this.convertCurrencyFrom];
       let result = ((currencyFromEuroValue*this.convertAmount) * this.currencyList.rates[this.convertCurrencyTo]).toFixed(2);
