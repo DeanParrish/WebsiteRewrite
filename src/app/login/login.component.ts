@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 //import { ToastrService } from 'ngx-toastr';
 
-import { AuthenticationService } from "../services/authentication-service.service";
+import { AuthService } from "../services/authservice.service";
 
 @Component({
   selector: "app-login",
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private auth: AuthService
   ) 
   {}
 
@@ -42,14 +42,13 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
-    this.authenticationService
-      .login(this.fval.email.value, this.fval.password.value)
-      .subscribe(
+    this.auth
+      .doEmailLogin({email: this.fval.email.value, pass: this.fval.password.value})
+      .then(
         (data) => {
           this.router.navigate(["/"]);
         },
         (error) => {
-          //this.toastr.error(error.error.message, 'Error');
           this.loading = false;
         }
       );

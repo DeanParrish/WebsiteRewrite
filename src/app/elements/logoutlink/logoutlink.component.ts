@@ -1,5 +1,4 @@
 import { Component, Inject, OnInit } from '@angular/core';
-// import { AuthService } from '@auth0/auth0-angular';
 import { DOCUMENT } from '@angular/common';
 import { AuthService } from 'src/app/services/authservice.service';
 

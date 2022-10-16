@@ -4,9 +4,6 @@ import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer  } from "@angular/platform-browser";
 import { NavbarComponent } from './elements/navbar/navbar.component';
 
-import { AuthenticationService } from './services/authentication-service.service';
-
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,7 +16,6 @@ export class AppComponent {
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
     private navBar: NavbarComponent,
-    private authenticationService: AuthenticationService,
     private router: Router,
   ){
     this.matIconRegistry.addSvgIcon(
@@ -34,10 +30,5 @@ export class AppComponent {
       "github",
       this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/images/social_github.svg")
     );
-  }
-
-  logout(){
-    this.authenticationService.logout();
-    this.router.navigate(['/login']);
   }
 }

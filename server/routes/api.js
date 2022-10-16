@@ -21,24 +21,6 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
 
-// const checkJwt = jwt({
-//     // Dynamically provide a signing key
-//     // based on the kid in the header and 
-//     // the signing keys provided by the JWKS endpoint.
-//     secret: jwksRsa.expressJwtSecret({
-//       cache: true,
-//       rateLimit: true,
-//       jwksRequestsPerMinute: 5,
-//       jwksUri: `https://dev-4zf9twtm.us.auth0.com/.well-known/jwks.json`
-//     }),
-  
-//     // Validate the audience and the issuer.
-//     //audience: 'https://deanparrish.net/',
-//     //issuer: `https://deanparrish.net/`,
-//     audience: 'portfoliowebsite-28f8a',
-//     issuer: 'https://securetoken.google.com/portfoliowebsite-28f8a',
-//     algorithms: ['RS256']
-//   });
 const checkJwt = function(idToken){
     console.log(JSON.stringify(req));
     admin

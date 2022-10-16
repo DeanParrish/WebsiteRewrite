@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
-// import { AuthService } from '@auth0/auth0-angular/';
 import { Observable } from 'rxjs';
 import { CssSelector } from '@angular/compiler';
 import { AuthService } from './authservice.service';
