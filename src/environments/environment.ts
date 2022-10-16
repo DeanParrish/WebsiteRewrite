@@ -3,14 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 import authConfig from '../auth_config.json'
-import { CacheLocation } from "@auth0/auth0-spa-js";
 
 export const environment = {
   production: false,
   domain: authConfig.domain,
   clientId: authConfig.clientId,
   redirectUri: window.location.origin,
-  cacheLocation: "localstorage" as CacheLocation,
   useRefreshTokens: true,
   firebase: authConfig.firebase,
   api_connector: "http://backend-app:2001",

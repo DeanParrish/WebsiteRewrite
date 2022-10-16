@@ -14,7 +14,7 @@ export class LoginlinkComponent implements OnInit {
   ngOnInit(): void {}
 
   loginWithRedirect(): void {
-   // this.auth.loginWithRedirect();
+   console.log("loginWithRedirect")
    let dialogRef = this.dialog.open(LoginfirebaseComponent, {
     height: '400px',
     width: '600px',
