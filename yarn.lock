@@ -7192,7 +7192,7 @@ is-answer@^0.1.0:
     is-primitive "^2.0.0"
     omit-empty "^0.4.1"
 
-is-arguments@^1.0.2, is-arguments@^1.0.4:
+is-arguments@^1.0.4:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/is-arguments/-/is-arguments-1.1.1.tgz#15b3f88fda01f2a97fec84ca761a560f123efa9b"
   integrity sha512-8Q7EARjzEnKpt/PCD7e1cgUS0a6X8u5tdSiMqXhojOdoV9TsMsiO+9VLC5vAmO8N7/GmXn7yjR8qnA6bVAEzfA==
@@ -7633,11 +7633,6 @@ isexe@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
   integrity sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==
-
-isobject@^1.0.0:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/isobject/-/isobject-1.0.2.tgz#f0f9b8ce92dd540fa0740882e3835a2e022ec78a"
-  integrity sha512-WQQgFoML/sLgmhu9zTekYHZUJaPoa/fpVMQ8oxIuOvppzs70DxxyHZdAIjwcuuNDOVtNYsahhqtBbUvKwhRcGw==
 
 isobject@^2.0.0, isobject@^2.1.0:
   version "2.1.0"
@@ -11677,34 +11672,7 @@ set-getter@^0.1.0:
   dependencies:
     to-object-path "^0.3.0"
 
-set-value@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/set-value/-/set-value-0.2.0.tgz#73b0a6825c158c6a16a82bbdc95775bf2a825fab"
-  integrity sha512-dJaeu7V8d1KwjePimg1oOpGp31cEw/uRcZlfL7wwemkr+A00ev/ZhikvSMiQ4hkf83d8JdY2AFoFmXsKzmHMSw==
-  dependencies:
-    isobject "^1.0.0"
-    noncharacters "^1.1.0"
-
-set-value@^0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/set-value/-/set-value-0.3.3.tgz#b81223681638a1088fd88a435b8a9d32dae8d9ba"
-  integrity sha512-aJPTd11HzK47w8xJMpyY4tBmFC6EidC8EG2fENxCJvPwLYzXLnNaesgo796y1fhSISSYAuah4Het+wDoPXK2tg==
-  dependencies:
-    extend-shallow "^2.0.1"
-    isobject "^2.0.0"
-    to-object-path "^0.2.0"
-
-set-value@^0.4.0, set-value@^0.4.2, set-value@^0.4.3:
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/set-value/-/set-value-0.4.3.tgz#7db08f9d3d22dc7f78e53af3c3bf4666ecdfccf1"
-  integrity sha512-2Z0LRUUvYeF7gIFFep48ksPq0NR09e5oKoFXznaMGNcu+EZAfGnyL0K6xno2gCqX6dZYEZRjrcn04/gvZzcKhQ==
-  dependencies:
-    extend-shallow "^2.0.1"
-    is-extendable "^0.1.1"
-    is-plain-object "^2.0.1"
-    to-object-path "^0.3.0"
-
-set-value@^2.0.0, set-value@^2.0.1:
+set-value@2.0.1, set-value@^0.2.0, set-value@^0.3.3, set-value@^0.4.0, set-value@^0.4.2, set-value@^0.4.3, set-value@^2.0.0, set-value@^2.0.1, set-value@^3.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/set-value/-/set-value-2.0.1.tgz#a18d40530e6f07de4228c7defe4227af8cad005b"
   integrity sha512-JxHc1weCN68wRY0fhCoXpyK55m/XPHafOmK4UWD7m2CI14GMcFypt4w/0+NV5f/ZMby2F6S2wwA7fgynh9gWSw==
@@ -11713,13 +11681,6 @@ set-value@^2.0.0, set-value@^2.0.1:
     is-extendable "^0.1.1"
     is-plain-object "^2.0.3"
     split-string "^3.0.1"
-
-set-value@^3.0.1:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/set-value/-/set-value-3.0.3.tgz#178e190d29cec6c086167222177b2fcb92f7ad56"
-  integrity sha512-Xsn/XSatoVOGBbp5hs3UylFDs5Bi9i+ArpVJKdHPniZHoEgRniXTqHWrWrGQ0PbEClVT6WtfnBwR8CAHC9sveg==
-  dependencies:
-    is-plain-object "^2.0.4"
 
 setimmediate@^1.0.5:
   version "1.0.5"
@@ -12611,14 +12572,6 @@ to-file@^0.2.0:
     isobject "^2.1.0"
     lazy-cache "^2.0.1"
     vinyl "^1.1.1"
-
-to-object-path@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/to-object-path/-/to-object-path-0.2.0.tgz#1634e1b52a88ba00e3949619fc0081dc9a3b07ca"
-  integrity sha512-6oMu4CTicplxUMOXBoS1W9YNjIclUzmWpWf02v+JnYMEGVX24rTCsYMHay85WA7Wq+9wZa2iJ+HAAX0yGOcxCQ==
-  dependencies:
-    arr-flatten "^1.0.1"
-    is-arguments "^1.0.2"
 
 to-object-path@^0.3.0:
   version "0.3.0"
