@@ -2,7 +2,7 @@ version: "3.4"
 services:
        front-end-app:
         container_name: frontend
-        image: ghcr.io/deanparrish/websiterewrite:master
+        image: frontend-test
         restart: always
         ports:
           - "5080:80"

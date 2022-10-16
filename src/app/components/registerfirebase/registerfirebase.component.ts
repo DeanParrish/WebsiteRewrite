@@ -49,18 +49,13 @@ export class RegisterfirebaseComponent implements OnInit {
   }
 
   tryRegister(value){
-
-    console.log(this.registerForm.errors);
-
     if(!this.registerForm.errors){
       this.authService.doRegister(value)
       .then(res => {
-        console.log(res);
         this.errorMessage = "";
         this.successMessage = "Your account has been created";
         this.dialog.closeAll();
       }, err => {
-        console.log(err);
         this.errorMessage = err.message;
         this.successMessage = "";
       })

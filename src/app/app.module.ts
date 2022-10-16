@@ -36,9 +36,8 @@ import { environment as env } from '../environments/environment';
 import { LoginlinkComponent } from './elements/loginlink/loginlink.component';
 import { LogoutlinkComponent } from './elements/logoutlink/logoutlink.component';
 
-import { AngularFireModule } from '@angular/fire';
-// import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireAuthModule } from '@angular/fire/auth';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
 import { RegisterfirebaseComponent } from './components/registerfirebase/registerfirebase.component';
 import { LoginfirebaseComponent } from './components/loginfirebase/loginfirebase.component';
 import { AuthGuard } from './authguard/authguard.component';
@@ -128,8 +127,8 @@ export const appRoutes: Routes = [
 		LoginfirebaseComponent,
   ],
   imports: [
-		AngularFireModule.initializeApp(env.firebase),
-		AngularFireAuthModule,
+		provideFirebaseApp(() => initializeApp(env.firebase)),
+		provideAuth(() => getAuth()),
 		BrowserModule,
 		BrowserAnimationsModule,
 		SharedModule,
